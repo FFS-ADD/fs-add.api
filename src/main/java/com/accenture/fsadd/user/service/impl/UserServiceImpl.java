@@ -38,7 +38,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
 		User user = this.getUserByEmail(username);
 		if (user == null) {
 			return null;

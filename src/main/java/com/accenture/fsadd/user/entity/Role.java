@@ -3,7 +3,7 @@ package com.accenture.fsadd.user.entity;
 public enum Role {
 
 	USERS("USERS"),
-	ADMIN("ADMINS");
+	ADMIN("ADMIN");
 	
 	private String roleName;
 	

@@ -1,0 +1,1 @@
+{"_id":{"$oid":"5886b422e6f67f06d9fb859b"},"_class":"com.accenture.fsadd.user.entity.User","email":"abc@abc.com","password":"abc#123","role":"ADMINS"}

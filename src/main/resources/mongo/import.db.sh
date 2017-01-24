@@ -1,0 +1,1 @@
+mongoimport --db fsadd --file ./user.json

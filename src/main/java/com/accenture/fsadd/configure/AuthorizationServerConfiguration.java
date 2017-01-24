@@ -32,12 +32,12 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 
 		clients.inMemory()
-	        .withClient("my-trusted-client")
+	        .withClient("fs-add.mobile")
             .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
             .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
             .scopes("read", "write", "trust")
             //TODO Need to generate the secretKey
-            .secret("secret")
+            .secret("1234567890")
             .accessTokenValiditySeconds(120).//Access token is only valid for 2 minutes.
             refreshTokenValiditySeconds(600);//Refresh token is only valid for 10 minutes.
 	}
