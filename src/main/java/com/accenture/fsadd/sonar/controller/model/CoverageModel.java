@@ -14,7 +14,7 @@ public class CoverageModel extends CommonModel{
 	
 	private String success;
 	
-	private String Failures;
+	private String failures;
 
 	public String getCoverage() {
 		return coverage;
@@ -41,11 +41,11 @@ public class CoverageModel extends CommonModel{
 	}
 
 	public String getFailures() {
-		return Failures;
+		return failures;
 	}
 
 	public void setFailures(String failures) {
-		Failures = failures;
+		failures = failures;
 	}
 	
 }

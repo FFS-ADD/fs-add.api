@@ -1,9 +1,13 @@
 package com.accenture.fsadd.sonar.controller;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accenture.fsadd.common.APIExecutedStatusType;
+import com.accenture.fsadd.sonar.business.entity.SonarDashboardEntity;
+import com.accenture.fsadd.sonar.business.service.SonarDashboardService;
 import com.accenture.fsadd.sonar.controller.model.CoverageModel;
 import com.accenture.fsadd.sonar.controller.model.DuplicationModel;
 import com.accenture.fsadd.sonar.controller.model.LocModel;
@@ -14,6 +18,8 @@ import com.hotpot.core.mvc.model.ApiModel;
 @RequestMapping("/sonardashboard")
 public class SonarDashboardController {
 
+	@Autowired
+	SonarDashboardService sonarDashboardService;
     /**
      * get qualityDate data from sonar dashboard
      * @param form
@@ -23,10 +29,8 @@ public class SonarDashboardController {
 	public ApiModel<QualityGateModel> getQualityDateAction(){
 		
 		QualityGateModel model = new QualityGateModel();
-		model.setBugs("60");
-		model.setCodeSmells("2.1K");
-		model.setQualityGateStatus("success");
-		model.setVulneralilities("30");
+		SonarDashboardEntity entity = sonarDashboardService.getSonarDashboard("projectKey");
+		BeanUtils.copyProperties(entity, model);
 		model.setStatus(APIExecutedStatusType.SUCCESS.getValue());
 		return new ApiModel<>(model);
 	}
@@ -39,10 +43,8 @@ public class SonarDashboardController {
 	@RequestMapping("/getLoc")
 	public ApiModel<LocModel> getLocAction(){
 		LocModel model = new LocModel();
-		model.setLine("200K");
-		model.setCodeLines("20K");
-		model.setStatement("100K");
-		model.setFile("30K");
+		SonarDashboardEntity entity = sonarDashboardService.getSonarDashboard("projectKey");
+		BeanUtils.copyProperties(entity, model);
 		model.setStatus(APIExecutedStatusType.SUCCESS.getValue());
 		return new ApiModel<>(model);
 	}
@@ -55,10 +57,8 @@ public class SonarDashboardController {
 	@RequestMapping("/getCoverage")
 	public ApiModel<CoverageModel> getCoverageAction(){
 		CoverageModel model = new CoverageModel();
-		model.setTests("200");
-		model.setSuccess("198");
-		model.setFailures("2");
-		model.setCoverage("99%");
+		SonarDashboardEntity entity = sonarDashboardService.getSonarDashboard("projectKey");
+		BeanUtils.copyProperties(entity, model);
 		model.setStatus(APIExecutedStatusType.SUCCESS.getValue());
 		return new ApiModel<>(model);
 	}
@@ -71,10 +71,8 @@ public class SonarDashboardController {
 	@RequestMapping("/getDuplication")
 	public ApiModel<DuplicationModel> getDuplicationModelAction(){
 		DuplicationModel model = new DuplicationModel();
-		model.setLine("200K");
-		model.setBlocks("1.9K");
-		model.setFile("20");
-		model.setDuplication("12.1%");
+		SonarDashboardEntity entity = sonarDashboardService.getSonarDashboard("projectKey");
+		BeanUtils.copyProperties(entity, model);
 		model.setStatus(APIExecutedStatusType.SUCCESS.getValue());
 		return new ApiModel<>(model);
 	}

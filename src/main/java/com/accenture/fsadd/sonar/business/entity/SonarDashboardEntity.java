@@ -1,6 +1,10 @@
 package com.accenture.fsadd.sonar.business.entity;
 
 public class SonarDashboardEntity {
+	private String projectKey;
+	
+	private String createDate;
+	
 	private String qualityGateStatus;
 	
 	private String vulneralilities;
@@ -21,6 +25,34 @@ public class SonarDashboardEntity {
 	
 	private String tests;
 	
+	private String success;
+	
+	private String failures;
+	
+	private String duplication;
+	
+	private String dLine;
+	
+	private String blocks;
+	
+	private String dFile;
+
+	public String getProjectKey() {
+		return projectKey;
+	}
+
+	public void setProjectKey(String projectKey) {
+		this.projectKey = projectKey;
+	}
+
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+
 	public String getQualityGateStatus() {
 		return qualityGateStatus;
 	}
@@ -110,15 +142,44 @@ public class SonarDashboardEntity {
 	}
 
 	public String getFailures() {
-		return Failures;
+		return failures;
 	}
 
 	public void setFailures(String failures) {
-		Failures = failures;
+		this.failures = failures;
 	}
 
-	private String success;
+	public String getDuplication() {
+		return duplication;
+	}
+
+	public void setDuplication(String duplication) {
+		this.duplication = duplication;
+	}
+
+	public String getdLine() {
+		return dLine;
+	}
+
+	public void setdLine(String dLine) {
+		this.dLine = dLine;
+	}
+
+	public String getBlocks() {
+		return blocks;
+	}
+
+	public void setBlocks(String blocks) {
+		this.blocks = blocks;
+	}
+
+	public String getdFile() {
+		return dFile;
+	}
+
+	public void setdFile(String dFile) {
+		this.dFile = dFile;
+	}
 	
-	private String Failures;
-	
+
 }
