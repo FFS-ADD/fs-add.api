@@ -1,4 +1,4 @@
-package com.accenture.fsadd.sonar.entity;
+package com.accenture.fsadd.sonar.business.entity;
 
 public class QualitygatesProjectStatusEntity {
 	ProjectStatus projectStatus;

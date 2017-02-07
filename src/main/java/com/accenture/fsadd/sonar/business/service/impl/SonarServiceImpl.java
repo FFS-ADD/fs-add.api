@@ -1,4 +1,4 @@
-package com.accenture.fsadd.sonar.service.impl;
+package com.accenture.fsadd.sonar.business.service.impl;
 
 import java.util.Map;
 
@@ -6,8 +6,8 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import com.accenture.fsadd.sonar.entity.QualitygatesProjectStatusEntity;
-import com.accenture.fsadd.sonar.service.SonarService;
+import com.accenture.fsadd.sonar.business.entity.QualitygatesProjectStatusEntity;
+import com.accenture.fsadd.sonar.business.service.SonarService;
 import com.accenture.fsadd.util.JsonUtils;
 
 public class SonarServiceImpl implements SonarService {
