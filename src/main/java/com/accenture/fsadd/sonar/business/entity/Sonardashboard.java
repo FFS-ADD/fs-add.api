@@ -1,6 +1,13 @@
 package com.accenture.fsadd.sonar.business.entity;
 
-public class SonarDashboardEntity {
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.data.annotation.Id;
+
+public class Sonardashboard {
+	@Id
+	private String id;
+	
 	private String projectKey;
 	
 	private String createDate;
@@ -181,5 +188,18 @@ public class SonarDashboardEntity {
 		this.dFile = dFile;
 	}
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+	}
+
 
 }

@@ -1,9 +1,11 @@
 package com.accenture.fsadd.sonar.business.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.accenture.fsadd.sonar.business.entity.SonarDashboardEntity;
+import com.accenture.fsadd.sonar.business.entity.Sonardashboard;
 import com.accenture.fsadd.sonar.business.repository.SonarDashboardRepository;
 import com.accenture.fsadd.sonar.business.service.SonarDashboardService;
 
@@ -14,8 +16,8 @@ public class SonarDashboardServiceImpl implements SonarDashboardService {
 	SonarDashboardRepository sonarDashboardRepository;
 	
 	@Override
-	public SonarDashboardEntity getSonarDashboard(String projectKey) {
-		SonarDashboardEntity entity = sonarDashboardRepository.findByProjectKey(projectKey);
+	public Sonardashboard getSonarDashboard(String projectKey) {
+		Sonardashboard entity = sonarDashboardRepository.findOneByProjectKey(projectKey,new Sort(Direction.DESC,"createDate"));
 		return entity;
 	}
 

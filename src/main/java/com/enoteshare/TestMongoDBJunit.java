@@ -1,6 +1,7 @@
 package com.enoteshare;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
@@ -20,6 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -42,6 +44,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.ResourceUtils;
 
+import com.accenture.fsadd.sonar.business.entity.Sonardashboard;
+import com.accenture.fsadd.sonar.business.service.SonarDashboardService;
 import com.mongodb.MongoClient;
 
 @RunWith(SpringRunner.class)
@@ -50,7 +54,7 @@ public class TestMongoDBJunit {
 
 	@Autowired
 	private PersonService personService;
-
+	
 	private Logger log = Logger.getLogger(TestMongoDBJunit.class);
 
 	public static class Sample {
@@ -414,6 +418,19 @@ public class TestMongoDBJunit {
 
 	}
 
+	@Test
+	public void testQueryOrderby() {
+		MongoOperations template = new MongoTemplate(new SimpleMongoDbFactory(new MongoClient("localhost"), "fsadd"));
+		PersonExample person3 = new PersonExample();
+		person3.setFirstname("tianjian");
+		person3.setLastname("3");
+		template.insert(person3);
+		PersonExample person = personService.findOnePeople("tianjian");
+//		Query query = new Query(Criteria.where("projectKey").is("inventory-aid")).with(new Sort(Direction.DESC,"createDate"));
+//		Sonardashboard sonarDashboard = template.findOne(query, Sonardashboard.class);
+		assertNotNull(person.getFirstname());
+	}
+	
 	public static class MapReduceResult {
 		private String id;
 		private int value;

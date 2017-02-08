@@ -3,13 +3,12 @@
  */
 package com.accenture.fsadd.sonar.business.service;
 
-import com.accenture.fsadd.sonar.business.entity.SonarDashboardEntity;
+import com.accenture.fsadd.sonar.business.entity.Sonardashboard;
 
 /**
  * @author tianjian
  *
  */
 public interface SonarDashboardService {
-	
-	public SonarDashboardEntity getSonarDashboard(String projectKey);
+	public Sonardashboard getSonarDashboard(String projectKey);
 }
