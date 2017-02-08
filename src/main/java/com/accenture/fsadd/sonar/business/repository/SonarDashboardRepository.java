@@ -1,6 +1,7 @@
 package com.accenture.fsadd.sonar.business.repository;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.repository.Query;
@@ -14,4 +15,7 @@ public interface SonarDashboardRepository extends CrudBaseRepository<Sonardashbo
 	//@Query("find({'projectKey':?0}).sort({'createDate':-1}).limit(1)")
 	@Query(value="{'projectKey':?0}")
 	public Sonardashboard findOneByProjectKey(String projectKey,Sort sort);
+	
+	@Query(value="{'createDate':{'$gt' : fromDate, '$lt' : toDate}}")
+	public List<Sonardashboard> findBycreateDateBetween(String projectKey,String fromDate,String toDate,Sort sort);
 }
