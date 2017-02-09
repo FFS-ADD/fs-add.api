@@ -1,5 +1,6 @@
 package com.accenture.fsadd.sonar.business.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,8 @@ public class SonarDashboardServiceImpl implements SonarDashboardService {
 
 	@Override
 	public List<Sonardashboard> getSonarDashboardHist(String projectKey){
-		List<Sonardashboard> hist = sonarDashboardRepository.findBycreateDateBetween(projectKey, "","", new Sort(Direction.DESC,"createDate"));
+	//	List<Sonardashboard> hist = sonarDashboardRepository.findBycreateDateBetween(projectKey, "","", new Sort(Direction.DESC,"createDate"));
+		List<Sonardashboard> hist = new ArrayList<Sonardashboard>();
 		return hist;
 	}
 }

@@ -16,6 +16,6 @@ public interface SonarDashboardRepository extends CrudBaseRepository<Sonardashbo
 	@Query(value="{'projectKey':?0}")
 	public Sonardashboard findOneByProjectKey(String projectKey,Sort sort);
 	
-	@Query(value="{'createDate':{'$gt' : fromDate, '$lt' : toDate}}")
-	public List<Sonardashboard> findBycreateDateBetween(String projectKey,String fromDate,String toDate,Sort sort);
+	//@Query(value="{'createDate':{'$gt' : fromDate, '$lt' : toDate}}")
+	//public List<Sonardashboard> findBycreateDateBetween(String projectKey,String fromDate,String toDate,Sort sort);
 }
