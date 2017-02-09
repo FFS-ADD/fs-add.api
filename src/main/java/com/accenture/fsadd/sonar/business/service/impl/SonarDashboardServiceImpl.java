@@ -26,8 +26,7 @@ public class SonarDashboardServiceImpl implements SonarDashboardService {
 
 	@Override
 	public List<Sonardashboard> getSonarDashboardHist(String projectKey){
-	//	List<Sonardashboard> hist = sonarDashboardRepository.findBycreateDateBetween(projectKey, "","", new Sort(Direction.DESC,"createDate"));
-		List<Sonardashboard> hist = new ArrayList<Sonardashboard>();
+		List<Sonardashboard> hist = sonarDashboardRepository.findByprojectKeyAndCreateDateRange(projectKey, "2017/2/3","2017/2/9", new Sort(Direction.DESC,"createDate"));
 		return hist;
 	}
 }

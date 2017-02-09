@@ -1,6 +1,7 @@
 package com.enoteshare;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -421,14 +422,26 @@ public class TestMongoDBJunit {
 	@Test
 	public void testQueryOrderby() {
 		MongoOperations template = new MongoTemplate(new SimpleMongoDbFactory(new MongoClient("localhost"), "fsadd"));
-		PersonExample person3 = new PersonExample();
-		person3.setFirstname("tianjian");
-		person3.setLastname("3");
-		template.insert(person3);
-		PersonExample person = personService.findOnePeople("tianjian");
+//		PersonExample person3 = new PersonExample();
+//		person3.setFirstname("1");
+//		person3.setLastname("1");
+//		template.insert(person3);
+//		PersonExample person1 = new PersonExample();
+//		person1.setFirstname("2");
+//		person1.setLastname("2");
+//		template.insert(person1);
+//		PersonExample person2 = new PersonExample();
+//		person2.setFirstname("3");
+//		person2.setLastname("3");
+//		template.insert(person2);
+//		PersonExample person4 = new PersonExample();
+//		person4.setFirstname("4");
+//		person4.setLastname("4");
+//		template.insert(person4);
+		List<PersonExample> personList = personService.findAllPeople();
 //		Query query = new Query(Criteria.where("projectKey").is("inventory-aid")).with(new Sort(Direction.DESC,"createDate"));
 //		Sonardashboard sonarDashboard = template.findOne(query, Sonardashboard.class);
-		assertNotNull(person.getFirstname());
+		assertEquals(3, personList.size());
 	}
 	
 	public static class MapReduceResult {
