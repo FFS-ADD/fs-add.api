@@ -8,7 +8,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.accenture.fsadd.sonar.business.entity.QualitygatesProjectStatusEntity;
 import com.accenture.fsadd.sonar.business.service.SonarService;
-import com.accenture.fsadd.util.JsonUtils;
 
 public class SonarServiceImpl implements SonarService {
 
