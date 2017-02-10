@@ -40,6 +40,8 @@ public class SonarDashboardServiceImpl implements SonarDashboardService {
 				FsaddConstant.DATE_FORMAT_YY_MM_DD_HH_MM_SS);
 		List<Sonardashboard> hist = sonarDashboardRepository.findByprojectKeyAndCreateDateRange(projectKey, fromDate,
 				toDate, new Sort(Direction.DESC, "createDate"));
+//		List<Sonardashboard> hist = sonarDashboardRepository.findByprojectKeyAndCreateDateRange(projectKey, "2017/2/2",
+//				"2017/2/9", new Sort(Direction.DESC, "createDate"));
 		return hist;
 	}
 }
