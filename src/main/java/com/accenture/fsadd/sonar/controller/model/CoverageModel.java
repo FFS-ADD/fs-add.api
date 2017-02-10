@@ -45,7 +45,7 @@ public class CoverageModel extends CommonModel{
 	}
 
 	public void setFailures(String failures) {
-		failures = failures;
+		this.failures = failures;
 	}
 	
 }

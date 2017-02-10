@@ -20,7 +20,7 @@ public class Sonardashboard {
 	
 	private String codeSmells;
 	
-	private String CodeLines;
+	private String codeLines;
 	
 	private String line;
 	
@@ -93,11 +93,11 @@ public class Sonardashboard {
 	}
 
 	public String getCodeLines() {
-		return CodeLines;
+		return codeLines;
 	}
 
 	public void setCodeLines(String codeLines) {
-		CodeLines = codeLines;
+		this.codeLines = codeLines;
 	}
 
 	public String getLine() {

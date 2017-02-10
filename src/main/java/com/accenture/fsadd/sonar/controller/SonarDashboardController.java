@@ -80,6 +80,8 @@ public class SonarDashboardController {
 		Sonardashboard entity = sonarDashboardService.getSonarDashboard("inventory-aid");
 		if(entity != null){
 			BeanUtils.copyProperties(entity, model);
+			model.setLine(entity.getdLine());
+			model.setFile(entity.getdFile());
 		}
 		model.setStatus(APIExecutedStatusType.SUCCESS.getValue());
 		return new ApiModel<>(model);

@@ -1,6 +1,8 @@
 package com.hotpot.core.mvc.model;
 
-public class ApiModel<T> {
+import com.accenture.fsadd.common.mvc.model.CommonModel;
+
+public class ApiModel<T>  extends CommonModel {
 
 	private T data;
 
