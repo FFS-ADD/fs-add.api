@@ -2,7 +2,7 @@ package com.accenture.fsadd.sonar.controller.model;
 
 import com.accenture.fsadd.common.mvc.model.CommonModel;
 
-public class QualityGateModel extends CommonModel{
+public class QualityGateModel{
 	/**
 	 * 
 	 */

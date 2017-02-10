@@ -33,8 +33,9 @@ public class SonarDashboardController {
 		if(entity != null){
 			BeanUtils.copyProperties(entity, model);
 		}
-		model.setStatus(APIExecutedStatusType.SUCCESS.getValue());
-		return new ApiModel<>(model);
+		ApiModel<QualityGateModel> apiMdole = new ApiModel<>(model); 
+		apiMdole.setStatus(APIExecutedStatusType.SUCCESS.getValue());
+		return apiMdole;
 	}
 
     /**
@@ -49,8 +50,9 @@ public class SonarDashboardController {
 		if(entity != null){
 			BeanUtils.copyProperties(entity, model);
 		}
-		model.setStatus(APIExecutedStatusType.SUCCESS.getValue());
-		return new ApiModel<>(model);
+		ApiModel<LocModel> apiMdole = new ApiModel<>(model); 
+		apiMdole.setStatus(APIExecutedStatusType.SUCCESS.getValue());
+		return apiMdole;
 	}
 
     /**
@@ -65,8 +67,9 @@ public class SonarDashboardController {
 		if(entity != null){
 			BeanUtils.copyProperties(entity, model);
 		}
-		model.setStatus(APIExecutedStatusType.SUCCESS.getValue());
-		return new ApiModel<>(model);
+		ApiModel<CoverageModel> apiMdole = new ApiModel<>(model); 
+		apiMdole.setStatus(APIExecutedStatusType.SUCCESS.getValue());
+		return apiMdole;
 	}
 	
     /**
@@ -83,7 +86,8 @@ public class SonarDashboardController {
 			model.setLine(entity.getdLine());
 			model.setFile(entity.getdFile());
 		}
-		model.setStatus(APIExecutedStatusType.SUCCESS.getValue());
-		return new ApiModel<>(model);
+		ApiModel<DuplicationModel> apiMdole = new ApiModel<>(model); 
+		apiMdole.setStatus(APIExecutedStatusType.SUCCESS.getValue());
+		return apiMdole;
 	}
 }

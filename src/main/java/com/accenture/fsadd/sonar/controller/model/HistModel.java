@@ -5,7 +5,7 @@ import java.util.List;
 import com.accenture.fsadd.common.mvc.model.CommonModel;
 import com.accenture.fsadd.sonar.business.entity.Sonardashboard;
 
-public class HistModel extends CommonModel{
+public class HistModel{
 	/**
 	 * 
 	 */
