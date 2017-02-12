@@ -9,6 +9,8 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,13 +43,18 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.data.mongodb.core.query.TextQuery;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.ResourceUtils;
+import org.springframework.web.client.RestTemplate;
 
 import com.accenture.fsadd.sonar.business.entity.Sonardashboard;
 import com.accenture.fsadd.sonar.business.service.SonarDashboardService;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.util.JSON;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -421,7 +428,7 @@ public class TestMongoDBJunit {
 
 	@Test
 	public void testQueryOrderby() {
-		MongoOperations template = new MongoTemplate(new SimpleMongoDbFactory(new MongoClient("localhost"), "fsadd"));
+		MongoOperations mongoTemplate = new MongoTemplate(new SimpleMongoDbFactory(new MongoClient("localhost"), "fsadd"));
 //		PersonExample person3 = new PersonExample();
 //		person3.setFirstname("1");
 //		person3.setLastname("1");
@@ -438,10 +445,19 @@ public class TestMongoDBJunit {
 //		person4.setFirstname("4");
 //		person4.setLastname("4");
 //		template.insert(person4);
-		List<PersonExample> personList = personService.findAllPeople();
+//		List<PersonExample> personList = personService.findAllPeople();
 //		Query query = new Query(Criteria.where("projectKey").is("inventory-aid")).with(new Sort(Direction.DESC,"createDate"));
 //		Sonardashboard sonarDashboard = template.findOne(query, Sonardashboard.class);
-		assertEquals(3, personList.size());
+		
+//		assertEquals(3, personList.size());
+		RestTemplate restTemplate = new RestTemplate();
+		String url = "http://localhost:9000/sonar/api/measures/component?componentKey=inventory-aid&metricKeys=vulnerabilities,bugs,code_smells,ncloc,lines,statements,files,tests,test_failures,test_success_density,coverage,duplicated_lines,duplicated_blocks,duplicated_files,duplicated_lines_density";
+		ResponseEntity<String> result = restTemplate.exchange(url, HttpMethod.GET, null, String.class);
+		Object parseResult = JSON.parse(result.getBody());
+		DBObject dbObject = (DBObject)parseResult;
+		dbObject.put("getAt", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
+		mongoTemplate.insert(dbObject.get("component"),"sonarqube_issues");
+		assertNotNull(parseResult);
 	}
 	
 	public static class MapReduceResult {
