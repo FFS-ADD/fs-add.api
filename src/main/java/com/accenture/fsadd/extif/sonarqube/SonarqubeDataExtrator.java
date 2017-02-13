@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpMethod;
@@ -30,7 +31,6 @@ public class SonarqubeDataExtrator{
 	
 	public void extractIssues(){		
 		RestTemplate restTemplate = new RestTemplate();
-		sonarqubeSetting.setProjectKey(FsaddConstant.SONARQUBE_TEST_PROJECT_KEY);
 		ResponseEntity<String> result = restTemplate.exchange(sonarqubeSetting.getSonarqubeMeasuresUrl(), HttpMethod.GET, null, String.class);
 		Object parseResult = JSON.parse(result.getBody());
 		if(!(parseResult instanceof DBObject)){

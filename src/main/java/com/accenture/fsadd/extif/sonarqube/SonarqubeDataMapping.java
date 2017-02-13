@@ -36,10 +36,13 @@ public class SonarqubeDataMapping {
 	@Value("${fsadd.sonarqube.mongodb.collection.sonardashboard}")
 	private String sonardashboardCollectionName;
 	
+	@Value("${fsadd.sonarqube.project}")
+	private String projectKey;
+	
 	public void mappingDataToSonarDashboard(){
 		// get sonarqube date
 		String result = mongoTemplate.findOne(
-				new Query(Criteria.where(FsaddConstant.SONARQUBE_ISSUES_KEY).is(FsaddConstant.SONARQUBE_TEST_PROJECT_KEY)).with(new Sort(Direction.DESC, FsaddConstant.INSERT_DATA_COL)), String.class, sonarqubeSetting.getIssueCollectionName());
+				new Query(Criteria.where(FsaddConstant.SONARQUBE_ISSUES_KEY).is(projectKey)).with(new Sort(Direction.DESC, FsaddConstant.INSERT_DATA_COL)), String.class, sonarqubeSetting.getIssueCollectionName());
 		DBObject dbObject = (DBObject)JSON.parse(result);
 		@SuppressWarnings("unchecked")
 		List<DBObject> list = (List<DBObject>)dbObject.get(FsaddConstant.SONARQUBE_MEASURES_KEY);
@@ -100,6 +103,7 @@ public class SonarqubeDataMapping {
 		
 		// set createdate
 		sonardashboard.setCreateDate(FsaddUtil.convertLocaldateTimeToString(LocalDateTime.now(),FsaddConstant.DATAE_FORMAT_YYYYMMDDHHMMSS));
+		sonardashboard.setProjectKey(projectKey);
 		return sonardashboard;
 	}
 

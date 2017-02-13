@@ -461,7 +461,7 @@ public class TestMongoDBJunit {
 //		mongoTemplate.insert(componentObject,"sonarqube_issues");
 //		assertNotNull(parseResult);
 		String sonarresult = mongoTemplate.findOne(
-				new Query(Criteria.where(FsaddConstant.SONARQUBE_ISSUES_KEY).is(FsaddConstant.SONARQUBE_TEST_PROJECT_KEY)).with(new Sort(Direction.DESC, FsaddConstant.INSERT_DATA_COL)), String.class, "sonarqube_issues");
+				new Query(Criteria.where(FsaddConstant.SONARQUBE_ISSUES_KEY).is("")).with(new Sort(Direction.DESC, FsaddConstant.INSERT_DATA_COL)), String.class, "sonarqube_issues");
 		DBObject sonarObject = (DBObject)JSON.parse(sonarresult);
 		List<DBObject> list = (List<DBObject>)sonarObject.get("measures");
 		for(DBObject object : list){

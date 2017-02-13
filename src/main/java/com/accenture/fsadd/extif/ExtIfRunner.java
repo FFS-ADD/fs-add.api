@@ -18,7 +18,7 @@ public class ExtIfRunner implements Runnable {
 	
 	public void run() {
 		log.info("Start");
-		//sonarqubeDataExtrator.extractIssues();
+		sonarqubeDataExtrator.extractIssues();
 		sonarqubeDataMapping.mappingDataToSonarDashboard();
 		log.info("End");
 		

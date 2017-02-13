@@ -3,6 +3,7 @@ package com.accenture.fsadd.sonar.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,8 +18,10 @@ import com.hotpot.core.mvc.model.ApiModel;
 public class SonarDashboardHistController {
 
 	@Autowired
-	SonarDashboardService sonarDashboardService;
+	private SonarDashboardService sonarDashboardService;
 	
+	@Value("${fsadd.sonarqube.project}")
+	private String projectKey;
     /**
      * get weekly history data from sonar dashboard
      * @param form
@@ -26,7 +29,7 @@ public class SonarDashboardHistController {
      */
 	@RequestMapping("/getHist")
 	public ApiModel<HistModel> getHistAction(){
-		List<Sonardashboard> entityList = sonarDashboardService.getSonarDashboardHist("inventory-aid");
+		List<Sonardashboard> entityList = sonarDashboardService.getSonarDashboardHist(projectKey);
 		HistModel histModel = new HistModel();
 		histModel.setSonardashboardlList(entityList);
 		ApiModel<HistModel> apiMdole = new ApiModel<>(histModel); 

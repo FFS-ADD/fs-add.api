@@ -11,8 +11,7 @@ public final class FsaddConstant {
     public static final String DATAE_FORMAT_YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
    // sonarqube mongo data key
     public static final String SONARQUBE_ACCESS_KEY = "component";
-    public static final String SONARQUBE_MEASURES_URL = "api/measures/component?componentKey=ffg_batch&metricKeys=alert_status,vulnerabilities,bugs,code_smells,ncloc,lines,statements,files,tests,test_failures,test_success_density,coverage,duplicated_lines,duplicated_blocks,duplicated_files,duplicated_lines_density";
-    public static final String SONARQUBE_TEST_PROJECT_KEY = "ffg_batch";
+    public static final String SONARQUBE_MEASURES_URL = "api/measures/component?metricKeys=alert_status,vulnerabilities,bugs,code_smells,ncloc,lines,statements,files,tests,test_failures,test_success_density,coverage,duplicated_lines,duplicated_blocks,duplicated_files,duplicated_lines_density&componentKey=";
     public static final String SONARQUBE_ISSUES_KEY = "key";
     public static final String SONARQUBE_MEASURES_KEY = "measures";
     public static final String SONARQUBE_METRIC_KEY = "metric";

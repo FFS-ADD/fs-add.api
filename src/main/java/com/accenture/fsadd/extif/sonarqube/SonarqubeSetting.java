@@ -16,6 +16,7 @@ public class SonarqubeSetting {
 	@Value("${fsadd.sonarqube.url}")
 	private String sonarqubeUrl;
 	
+	@Value("${fsadd.sonarqube.project}")
 	private String projectKey;
 
 	/**
@@ -49,7 +50,7 @@ public class SonarqubeSetting {
 	}
 
 	public String getSonarqubeMeasuresUrl() {
-		return this.sonarqubeUrl + FsaddConstant.SONARQUBE_MEASURES_URL;
+		return this.sonarqubeUrl + FsaddConstant.SONARQUBE_MEASURES_URL+projectKey;
 	}
 
 }
