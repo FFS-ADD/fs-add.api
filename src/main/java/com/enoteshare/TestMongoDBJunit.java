@@ -50,6 +50,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestTemplate;
 
+import com.accenture.fsadd.common.FsaddConstant;
 import com.accenture.fsadd.sonar.business.entity.Sonardashboard;
 import com.accenture.fsadd.sonar.business.service.SonarDashboardService;
 import com.mongodb.DBObject;
@@ -450,14 +451,23 @@ public class TestMongoDBJunit {
 //		Sonardashboard sonarDashboard = template.findOne(query, Sonardashboard.class);
 		
 //		assertEquals(3, personList.size());
-		RestTemplate restTemplate = new RestTemplate();
-		String url = "http://localhost:9000/sonar/api/measures/component?componentKey=inventory-aid&metricKeys=vulnerabilities,bugs,code_smells,ncloc,lines,statements,files,tests,test_failures,test_success_density,coverage,duplicated_lines,duplicated_blocks,duplicated_files,duplicated_lines_density";
-		ResponseEntity<String> result = restTemplate.exchange(url, HttpMethod.GET, null, String.class);
-		Object parseResult = JSON.parse(result.getBody());
-		DBObject dbObject = (DBObject)parseResult;
-		dbObject.put("getAt", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
-		mongoTemplate.insert(dbObject.get("component"),"sonarqube_issues");
-		assertNotNull(parseResult);
+//		RestTemplate restTemplate = new RestTemplate();
+//		String url = "http://localhost:9000/sonar/api/measures/component?componentKey=ffg_batch&metricKeys=vulnerabilities,bugs,code_smells,ncloc,lines,statements,files,tests,test_failures,test_success_density,coverage,duplicated_lines,duplicated_blocks,duplicated_files,duplicated_lines_density";
+//		ResponseEntity<String> result = restTemplate.exchange(url, HttpMethod.GET, null, String.class);
+//		Object parseResult = JSON.parse(result.getBody());
+//		DBObject dbObject = (DBObject)parseResult;
+//		DBObject componentObject = (DBObject)dbObject.get("component");
+//		componentObject.put("getAt", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
+//		mongoTemplate.insert(componentObject,"sonarqube_issues");
+//		assertNotNull(parseResult);
+		String sonarresult = mongoTemplate.findOne(
+				new Query(Criteria.where(FsaddConstant.SONARQUBE_ISSUES_KEY).is(FsaddConstant.SONARQUBE_TEST_PROJECT_KEY)).with(new Sort(Direction.DESC, FsaddConstant.INSERT_DATA_COL)), String.class, "sonarqube_issues");
+		DBObject sonarObject = (DBObject)JSON.parse(sonarresult);
+		List<DBObject> list = (List<DBObject>)sonarObject.get("measures");
+		for(DBObject object : list){
+			String value = object.get("value").toString();
+			assertNotNull(value);
+		}
 	}
 	
 	public static class MapReduceResult {

@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import com.accenture.fsadd.common.FsaddConstant;
+
 @Component
 @ConfigurationProperties
 public class SonarqubeSetting {
@@ -11,10 +13,8 @@ public class SonarqubeSetting {
 	/**
 	 * Sonarqube issues URL
 	 */
-	@Value("${fsadd.sonarqube.issues.urll}")
-	private String sonarqubeIssuesUrl;
-	
-	private String sonarqubeServeUrl;
+	@Value("${fsadd.sonarqube.url}")
+	private String sonarqubeUrl;
 	
 	private String projectKey;
 
@@ -24,20 +24,12 @@ public class SonarqubeSetting {
 	@Value("${fsadd.sonarqube.mongodb.collection.issues}")
 	private String issueCollectionName;
 
-	public String getSonarqubeIssuesUrl() {
-		return this.sonarqubeIssuesUrl+this.sonarqubeIssuesUrl+this.projectKey;
+	public String getSonarqubeUrl() {
+		return sonarqubeUrl;
 	}
 
-	public void setSonarqubeIssuesUrl(String sonarqubeIssuesUrl) {
-		this.sonarqubeIssuesUrl = sonarqubeIssuesUrl;
-	}
-
-	public String getSonarqubeServeUrl() {
-		return sonarqubeServeUrl;
-	}
-
-	public void setSonarqubeServeUrl(String sonarqubeServeUrl) {
-		this.sonarqubeServeUrl = sonarqubeServeUrl;
+	public void setSonarqubeUrl(String sonarqubeUrl) {
+		this.sonarqubeUrl = sonarqubeUrl;
 	}
 
 	public String getProjectKey() {
@@ -54,6 +46,10 @@ public class SonarqubeSetting {
 
 	public void setIssueCollectionName(String issueCollectionName) {
 		this.issueCollectionName = issueCollectionName;
+	}
+
+	public String getSonarqubeMeasuresUrl() {
+		return this.sonarqubeUrl + FsaddConstant.SONARQUBE_MEASURES_URL;
 	}
 
 }
