@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.accenture.fsadd.common.FsaddConstant;
+import com.accenture.fsadd.common.FsaddUtil;
 import com.accenture.fsadd.core.SystemException;
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
@@ -37,7 +38,7 @@ public class SonarqubeDataExtrator{
 		}
 		DBObject dbObject = (DBObject)parseResult;
 		DBObject componentObject = (DBObject)dbObject.get(FsaddConstant.SONARQUBE_ACCESS_KEY);
-		componentObject.put(FsaddConstant.INSERT_DATA_COL, LocalDateTime.now().format(DateTimeFormatter.ofPattern(FsaddConstant.DATAE_FORMAT_YYYYMMDDHHMMSS)));
+		componentObject.put(FsaddConstant.INSERT_DATA_COL, FsaddUtil.convertLocaldateTimeToString(LocalDateTime.now(),FsaddConstant.DATAE_FORMAT_YYYYMMDDHHMMSS));
 		mongoTemplate.insert(componentObject, sonarqubeSetting.getIssueCollectionName());
 
 		

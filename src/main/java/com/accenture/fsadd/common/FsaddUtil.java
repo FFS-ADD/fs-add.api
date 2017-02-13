@@ -11,7 +11,7 @@ public class FsaddUtil {
         if (ldt == null) {
             return null;
         }
-        return LocalDateTime.now().format(new DateTimeFormatterBuilder().appendPattern(pattern).toFormatter());
+        return ldt.format(new DateTimeFormatterBuilder().appendPattern(pattern).toFormatter());
     }
     
 	public static String nullOrEmptyToZero(String value) {

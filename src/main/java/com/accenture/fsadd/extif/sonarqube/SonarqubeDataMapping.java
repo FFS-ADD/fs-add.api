@@ -1,5 +1,7 @@
 package com.accenture.fsadd.extif.sonarqube;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,30 +65,41 @@ public class SonarqubeDataMapping {
 	private Sonardashboard createSonardashboardEntity(Map<String, String> sonarMap){
 		Sonardashboard sonardashboard = new Sonardashboard();
 		
-		// get quality gate
-		sonardashboard.setQualityGateStatus(FsaddUtil.nullOrEmptyToZero(sonarMap.get("alert_status")));
+		// set quality gate
+		if(!StringUtils.isEmpty(sonarMap.get("alert_status"))){
+			if("OK".equals(sonarMap.get("alert_status").toString())){
+				sonardashboard.setQualityGateStatus("success");
+			}else{
+				sonardashboard.setQualityGateStatus("warning");
+			}
+		}else{
+			sonardashboard.setQualityGateStatus("");
+		}
+		
 		sonardashboard.setVulneralilities(FsaddUtil.nullOrEmptyToZero(sonarMap.get("vulnerabilities")));
 		sonardashboard.setBugs(FsaddUtil.nullOrEmptyToZero(sonarMap.get("bugs")));
 		sonardashboard.setCodeSmells(FsaddUtil.nullOrEmptyToZero(sonarMap.get("code_smells")));
 		
-		// get loc
+		// set loc
 		sonardashboard.setCodeLines(FsaddUtil.nullOrEmptyToZero(sonarMap.get("ncloc")));
 		sonardashboard.setLine(FsaddUtil.nullOrEmptyToZero(sonarMap.get("lines")));
 		sonardashboard.setStatement(FsaddUtil.nullOrEmptyToZero(sonarMap.get("statements")));
 		sonardashboard.setFile(FsaddUtil.nullOrEmptyToZero(sonarMap.get("files")));
 		
-		// get coverage
+		// set coverage
 		sonardashboard.setCoverage(FsaddUtil.nullOrEmptyToZero(sonarMap.get("coverage")));
 		sonardashboard.setTests(FsaddUtil.nullOrEmptyToZero(sonarMap.get("tests")));
 		sonardashboard.setSuccess(FsaddUtil.nullOrEmptyToZero(sonarMap.get("test_success_density")));
 		sonardashboard.setFailures(FsaddUtil.nullOrEmptyToZero(sonarMap.get("test_failures")));
 		
-		// get duplication
+		// set duplication
 		sonardashboard.setDuplication(FsaddUtil.nullOrEmptyToZero(sonarMap.get("duplicated_lines_density")));
 		sonardashboard.setdLine(FsaddUtil.nullOrEmptyToZero(sonarMap.get("duplicated_lines")));
 		sonardashboard.setBlocks(FsaddUtil.nullOrEmptyToZero(sonarMap.get("duplicated_blocks")));
 		sonardashboard.setdFile(FsaddUtil.nullOrEmptyToZero(sonarMap.get("duplicated_files")));
 		
+		// set createdate
+		sonardashboard.setCreateDate(FsaddUtil.convertLocaldateTimeToString(LocalDateTime.now(),FsaddConstant.DATAE_FORMAT_YYYYMMDDHHMMSS));
 		return sonardashboard;
 	}
 

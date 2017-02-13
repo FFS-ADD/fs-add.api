@@ -34,10 +34,10 @@ public class SonarDashboardServiceImpl implements SonarDashboardService {
 	public List<Sonardashboard> getSonarDashboardHist(String projectKey) {
 
 		String fromDate = FsaddUtil.convertLocaldateTimeToString(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS),
-				FsaddConstant.DATE_FORMAT_YY_MM_DD_HH_MM_SS);
+				FsaddConstant.DATAE_FORMAT_YYYYMMDDHHMMSS);
 		String toDate = FsaddUtil.convertLocaldateTimeToString(
 				LocalDateTime.now().minusDays(7).truncatedTo(ChronoUnit.HOURS),
-				FsaddConstant.DATE_FORMAT_YY_MM_DD_HH_MM_SS);
+				FsaddConstant.DATAE_FORMAT_YYYYMMDDHHMMSS);
 		List<Sonardashboard> hist = sonarDashboardRepository.findByprojectKeyAndCreateDateRange(projectKey, fromDate,
 				toDate, new Sort(Direction.DESC, "createDate"));
 //		List<Sonardashboard> hist = sonarDashboardRepository.findByprojectKeyAndCreateDateRange(projectKey, "2017/2/2",
