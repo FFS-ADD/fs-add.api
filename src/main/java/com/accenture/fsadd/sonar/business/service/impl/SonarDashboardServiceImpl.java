@@ -33,15 +33,27 @@ public class SonarDashboardServiceImpl implements SonarDashboardService {
 	@Override
 	public List<Sonardashboard> getSonarDashboardHist(String projectKey) {
 
-		String fromDate = FsaddUtil.convertLocaldateTimeToString(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS),
+		String toDate = FsaddUtil.convertLocaldateTimeToString(LocalDateTime.now(),
 				FsaddConstant.DATAE_FORMAT_YYYYMMDDHHMMSS);
-		String toDate = FsaddUtil.convertLocaldateTimeToString(
-				LocalDateTime.now().minusDays(7).truncatedTo(ChronoUnit.HOURS),
+		String fromDate = FsaddUtil.convertLocaldateTimeToString(
+				LocalDateTime.now().minusDays(6).truncatedTo(ChronoUnit.DAYS),
 				FsaddConstant.DATAE_FORMAT_YYYYMMDDHHMMSS);
 		List<Sonardashboard> hist = sonarDashboardRepository.findByprojectKeyAndCreateDateRange(projectKey, fromDate,
 				toDate, new Sort(Direction.DESC, "createDate"));
-//		List<Sonardashboard> hist = sonarDashboardRepository.findByprojectKeyAndCreateDateRange(projectKey, "2017/2/2",
-//				"2017/2/9", new Sort(Direction.DESC, "createDate"));
+		List<Sonardashboard> resultList = new ArrayList<Sonardashboard>();
+		for(int i=0;i<7;i++){
+			String compareDate = FsaddUtil.convertLocaldateTimeToString(LocalDateTime.now().minusDays(i),
+					FsaddConstant.DATAE_FORMAT_YYYYMMDD);
+			for(Sonardashboard sonardashboard:hist){
+				if(sonardashboard.getCreateDate().startsWith(compareDate)){
+					resultList.add(sonardashboard);
+					break;
+				}
+			}
+			if(resultList.size() < i+1){
+				resultList.add(new Sonardashboard());
+			}
+		}
 		return hist;
 	}
 }

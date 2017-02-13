@@ -44,6 +44,23 @@ public class Sonardashboard {
 	
 	private String dFile;
 
+	public Sonardashboard(){
+		vulneralilities="0";
+		bugs = "0";
+		codeSmells="0";
+		codeLines="0";
+		line="0";
+		statement="0";
+		file="0";
+		coverage="0";
+		tests="0";
+		success="0";
+		failures="0";
+		duplication="0";
+		dLine="0";
+		blocks="0";
+		dFile="0";
+	}
 	public String getProjectKey() {
 		return projectKey;
 	}
