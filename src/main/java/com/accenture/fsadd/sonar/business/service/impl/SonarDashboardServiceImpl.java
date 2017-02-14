@@ -51,7 +51,11 @@ public class SonarDashboardServiceImpl implements SonarDashboardService {
 				}
 			}
 			if(resultList.size() < i+1){
-				resultList.add(new Sonardashboard());
+				Sonardashboard empty = new Sonardashboard(); 
+				empty.setProjectKey(projectKey);
+				empty.setCreateDate(FsaddUtil.convertLocaldateTimeToString(LocalDateTime.now().minusDays(i),
+					FsaddConstant.DATAE_FORMAT_YYYYMMDDHHMMSS));
+				resultList.add(empty);
 			}
 		}
 		return hist;
