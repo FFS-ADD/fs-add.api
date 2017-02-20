@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hotpot.core.mvc.model.ApiModel;
+import com.accenture.fsadd.common.mvc.model.ApiModel;
 import com.hotpot.menu.controller.model.MenuModel;
 
 @RestController

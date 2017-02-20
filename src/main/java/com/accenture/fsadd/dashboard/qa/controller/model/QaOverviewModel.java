@@ -1,52 +1,43 @@
-package com.accenture.fsadd.dashboard.qa.business.entity;
+package com.accenture.fsadd.dashboard.qa.controller.model;
 
-import java.math.BigInteger;
-
-import org.springframework.data.annotation.Id;
+import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Query Answer Summary
+ * QA Overview Model
  *
  */
-public class QueryAnswerSummaryEntity {
-
-	@Id
-	private final BigInteger id = BigInteger.ONE;
+public class QaOverviewModel implements Serializable {
 
 	/**
-	 * Total
+	 * Serial Version UID
 	 */
-	private int totalCount;
+	private static final long serialVersionUID = -3136081297418267247L;
 
 	/**
 	 * New count
 	 */
+	@JsonProperty("new")
 	private int newCount;
 
 	/**
 	 * In progressing count
 	 */
+	@JsonProperty("inProgress")
 	private int inProgressIngCount;
 
 	/**
 	 * Overdue count
 	 */
+	@JsonProperty("overdue")
 	private int overdueCount;
 
 	/**
 	 * Closed count
 	 */
+	@JsonProperty("closed")
 	private int closedCount;
-
-	public int getTotalCount() {
-		return totalCount;
-	}
-
-	public void setTotalCount(int totalCount) {
-		this.totalCount = totalCount;
-	}
 
 	public int getNewCount() {
 		return newCount;
@@ -78,10 +69,6 @@ public class QueryAnswerSummaryEntity {
 
 	public void setClosedCount(int closedCount) {
 		this.closedCount = closedCount;
-	}
-
-	public BigInteger getId() {
-		return id;
 	}
 
 }

@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accenture.fsadd.common.APIExecutedStatusType;
+import com.accenture.fsadd.common.mvc.model.ApiModel;
 import com.accenture.fsadd.sonar.business.entity.Sonardashboard;
 import com.accenture.fsadd.sonar.business.service.SonarDashboardService;
 import com.accenture.fsadd.sonar.controller.model.HistModel;
-import com.hotpot.core.mvc.model.ApiModel;
 
 @RestController
 @RequestMapping("/sonardashboard")
