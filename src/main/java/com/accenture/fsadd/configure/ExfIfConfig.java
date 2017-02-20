@@ -13,23 +13,23 @@ import com.accenture.fsadd.extif.ExtIfRunner;
 
 @Configuration
 public class ExfIfConfig {
-	
-	@Bean
-	public ExtIfRunner getExtIfRunner(){
-		return new ExtIfRunner();
-	}
-	
-	@Bean
-	@Autowired
-	public ThreadPoolTaskScheduler getThreadPoolTaskScheduler(ExtIfRunner runner){
-		
-		ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
-		scheduler.initialize();
-		Date startTime = Date.from(LocalDateTime.now().plusMinutes(1).atZone(ZoneId.systemDefault()).toInstant());
-		scheduler.scheduleAtFixedRate(runner, startTime, 10*60*1000);
-		return scheduler;
-		
-	}
+//	
+//	@Bean
+//	public ExtIfRunner getExtIfRunner(){
+//		return new ExtIfRunner();
+//	}
+//	
+//	@Bean
+//	@Autowired
+//	public ThreadPoolTaskScheduler getThreadPoolTaskScheduler(ExtIfRunner runner){
+//		
+//		ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+//		scheduler.initialize();
+//		Date startTime = Date.from(LocalDateTime.now().plusMinutes(1).atZone(ZoneId.systemDefault()).toInstant());
+//		scheduler.scheduleAtFixedRate(runner, startTime, 10*60*1000);
+//		return scheduler;
+//		
+//	}
 	
 
 }
