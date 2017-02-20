@@ -11,7 +11,7 @@ import com.accenture.fsadd.dashboard.qa.business.service.QueryAnswerService;
 import com.accenture.fsadd.dashboard.qa.controller.model.QaOverviewModel;
 
 @RestController
-@RequestMapping("/qa")
+@RequestMapping("/add-api/qa")
 public class QaOverviewController {
 
 	@Autowired
