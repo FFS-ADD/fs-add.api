@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.accenture.fsadd.user.entity.User;
 import com.accenture.fsadd.user.repository.UserRepository;
 import com.accenture.fsadd.user.service.UserService;
+import com.accenture.fsadd.web.author.form.WebDashboardLoginForm;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -45,6 +46,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			return new UserWrapper(user);
 		}
 
+	}
+	
+	@Override
+	public boolean userLogin(WebDashboardLoginForm form) {
+		User user = userRepository.getUserByNameAndPasswd(form.getUsername(), form.getPassword());
+		if (user == null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	public static class UserWrapper implements UserDetails {

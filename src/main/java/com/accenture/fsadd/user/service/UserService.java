@@ -3,6 +3,7 @@ package com.accenture.fsadd.user.service;
 import java.util.List;
 
 import com.accenture.fsadd.user.entity.User;
+import com.accenture.fsadd.web.author.form.WebDashboardLoginForm;
 
 public interface UserService {
 	
@@ -12,4 +13,5 @@ public interface UserService {
 	
 	User getUserByEmail(String email);
 
+	boolean userLogin(WebDashboardLoginForm form);
 }
