@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	
 	@Override
 	public boolean userLogin(WebDashboardLoginForm form) {
-		User user = userRepository.getUserByNameAndPasswd(form.getUsername(), form.getPassword());
+		User user = userRepository.getUserByNameAndPassword(form.getUsername(), form.getPassword());
 		if (user == null) {
 			return false;
 		} else {
