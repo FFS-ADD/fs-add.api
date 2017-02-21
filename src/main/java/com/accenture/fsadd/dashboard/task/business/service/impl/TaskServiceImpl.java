@@ -56,7 +56,8 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public List<TaskDailySummaryEntity> getDailySummaryService(LocalDate fromDay, LocalDate toDay) {
-		List<TaskDailySummaryEntity> dailySummaryList = taskDailySummaryRepository.findByDayBetween(fromDay, toDay);
+		List<TaskDailySummaryEntity> dailySummaryList = taskDailySummaryRepository
+				.findByDayBetween(fromDay.minusDays(1), toDay.plusDays(1));
 		if (dailySummaryList == null) {
 			dailySummaryList = new ArrayList<>();
 		}
