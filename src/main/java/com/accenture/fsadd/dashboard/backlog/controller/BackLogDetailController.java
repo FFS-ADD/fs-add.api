@@ -47,7 +47,7 @@ public class BackLogDetailController {
 			backLogEntryModel
 					.setPlanedEndDateAsString(this.getDayAsString(openBackLog.getPlanedEndDate(), PATTERN_YYYMMDD));
 			backLogEntryModel.setPriorityAsString(this.getPriorityAsString(openBackLog.getPriority()));
-			backLogEntryModel.setDiffHours(openBackLog.getActualHours() - openBackLog.getEstimatedHours());
+			backLogEntryModel.setDiffHours(openBackLog.getEstimatedHours() - openBackLog.getActualHours());
 
 			backlogEntryModelList.add(backLogEntryModel);
 		});
@@ -88,9 +88,10 @@ public class BackLogDetailController {
 		for (int i = 0; i <= BACK_DAY_COUNT; i++) {
 			BackLogSummaryEntity backLogDailySummaryEntity = dailySummaryModelMap.get(fromDay.plusDays(i));
 			if (backLogDailySummaryEntity != null) {
-				backLogDailyBurnDownModel.getPlanCompletedCount()
-						.add(backLogDailySummaryEntity.getClosedCount() + backLogDailySummaryEntity.getDelayCount());
-				backLogDailyBurnDownModel.getActualCompletedCount().add(backLogDailySummaryEntity.getClosedCount());
+				backLogDailyBurnDownModel.getPlanCompletedCount().add(backLogDailySummaryEntity.getTotalCount()
+						- (backLogDailySummaryEntity.getClosedCount() + backLogDailySummaryEntity.getDelayCount()));
+				backLogDailyBurnDownModel.getActualCompletedCount()
+						.add(backLogDailySummaryEntity.getTotalCount() - backLogDailySummaryEntity.getClosedCount());
 			} else {
 				backLogDailyBurnDownModel.getPlanCompletedCount().add(0);
 				backLogDailyBurnDownModel.getActualCompletedCount().add(0);

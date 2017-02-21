@@ -122,12 +122,13 @@ public class BackLogServiceImpl implements BackLogService {
 				if (taskEntity.getStatus() != TaskEntity.Status.CLOSED) {
 					// Get the current stage task
 					currentStageTaskEntity = getCurrentStageTaskEntity(taskEntity, currentStageTaskEntity);
-				} else {
-					// Closed task
-					earnedHours = earnedHours + taskEntity.getEstimatedHours();
 				}
+//				} else {
+//					// Closed task
+//					earnedHours = earnedHours + taskEntity.getEstimatedHours();
+//				}
 			}
-			// Child task is existed(Should not be exists!)
+			// Child task is existed(Should always exists)
 			if (!taskEntityList.isEmpty()) {
 				// Set the backLog Entity
 				setBackLogEntityByCalculatedValue(backLogEnity, taskEntityList.size(), executedDay, plannedStartDate,
@@ -278,11 +279,11 @@ public class BackLogServiceImpl implements BackLogService {
 
 		// Set Done Ratio
 		backLogEnity.setActualHours(actualHours);
-		if (estimatedHours != 0) {
-			backLogEnity.setDoneRatio(earnedHours / estimatedHours * 100);
-		} else {
-			backLogEnity.setDoneRatio(0);
-		}
+//		if (estimatedHours != 0) {
+//			backLogEnity.setDoneRatio(earnedHours / estimatedHours * 100);
+//		} else {
+//			backLogEnity.setDoneRatio(0);
+//		}
 
 		// Set Stage
 		if (currentStageTaskEntity != null) {

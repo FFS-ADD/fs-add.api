@@ -30,13 +30,13 @@ public class TaskOverviewModel implements Serializable {
 	/**
 	 * Pending count
 	 */
-	@JsonProperty("closed")
+	@JsonProperty("pending")
 	private int pendingCount;
 
 	/**
 	 * Closed count
 	 */
-	@JsonProperty("pending")
+	@JsonProperty("closed")
 	private int closedCount;
 
 	public int getOnSheduleCount() {

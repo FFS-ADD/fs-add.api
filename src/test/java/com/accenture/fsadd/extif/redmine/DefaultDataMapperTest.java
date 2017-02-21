@@ -1,7 +1,6 @@
 package com.accenture.fsadd.extif.redmine;
 
-import static org.junit.Assert.*;
-
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.junit.Test;
@@ -49,7 +48,12 @@ public class DefaultDataMapperTest {
 		dataMapper.setIssueServcie(issueServcie);
 		dataMapper.setBackLogService(backLogService);
 		dataMapper.setTaskService(taskService);
-		dataMapper.map(LocalDateTime.now());
+
+		LocalDateTime now = LocalDateTime.now();
+		for(int i=0; i<7; i++){
+			dataMapper.map(now.minusDays(i));
+		}
+		
 	}
 
 }
