@@ -48,7 +48,8 @@ public class IssueServiceImpl implements IssueService {
 
 	@Override
 	public List<IssueDailySummaryEntity> getDailySummaryService(LocalDate fromDay, LocalDate toDay) {
-		List<IssueDailySummaryEntity> dailySummaryList = issueDailySummaryRepository.findByDayBetween(fromDay, toDay);
+		List<IssueDailySummaryEntity> dailySummaryList = issueDailySummaryRepository
+				.findByDayBetween(fromDay.minusDays(1), toDay.plusDays(1));
 		if (dailySummaryList == null) {
 			dailySummaryList = new ArrayList<>();
 		}

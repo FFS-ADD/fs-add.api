@@ -58,8 +58,8 @@ public class BackLogServiceImpl implements BackLogService {
 
 	@Override
 	public List<BackLogDailySummaryEntity> getDailySummaryService(LocalDate fromDay, LocalDate toDay) {
-		List<BackLogDailySummaryEntity> dailySummaryList = backLogDailySummaryRepository.findByDayBetween(fromDay,
-				toDay);
+		List<BackLogDailySummaryEntity> dailySummaryList = backLogDailySummaryRepository
+				.findByDayBetween(fromDay.minusDays(1), toDay.plusDays(1));
 		if (dailySummaryList == null) {
 			dailySummaryList = new ArrayList<>();
 		}
@@ -161,16 +161,22 @@ public class BackLogServiceImpl implements BackLogService {
 		switch (taskEntity.getType()) {
 		case ANALYSIS:
 			backLogEnity.setStage(BackLogEntity.Stage.ANALYSIS);
+			break;
 		case DESGIN:
 			backLogEnity.setStage(BackLogEntity.Stage.DESGIN);
+			break;
 		case DEVELOPMENT:
 			backLogEnity.setStage(BackLogEntity.Stage.DEPLOYMENT);
+			break;
 		case TEST:
 			backLogEnity.setStage(BackLogEntity.Stage.TEST);
+			break;
 		case DEPLOYMENT:
 			backLogEnity.setStage(BackLogEntity.Stage.DEPLOYMENT);
+			break;
 		default:
 			backLogEnity.setStage(BackLogEntity.Stage.DEPLOYMENT);
+			break;
 		}
 
 	}
@@ -257,10 +263,13 @@ public class BackLogServiceImpl implements BackLogService {
 			backLogEnity.setActualEndDate(null);
 		}
 		backLogEnity.setEstimatedHours(estimatedHours);
-		
+
 		// We will not calculate the other value if backlog is pending
 		if (backLogEnity.getStatus() == BackLogEntity.Status.PENDING) {
 			return;
+		}
+		if (backLogEnity.getStatus() != BackLogEntity.Status.CLOSED && plannedEndDate.isBefore(executedDay)) {
+			backLogEnity.setStatus(BackLogEntity.Status.DELAY);
 		}
 
 		// Set Plan start Day and end Day
@@ -290,17 +299,23 @@ public class BackLogServiceImpl implements BackLogService {
 					summaryEntity.getPlannedEstimatedHours() + backLogEnity.getEstimatedHours());
 			summaryEntity.setReportedHours(summaryEntity.getReportedHours() + backLogEnity.getActualHours());
 		}
-		summaryEntity.setTotalCount(summaryEntity.getTotalCount());
+		summaryEntity.setTotalCount(summaryEntity.getTotalCount() + 1);
 		switch (backLogEnity.getStatus()) {
 		case NEW:
 			summaryEntity.setNewCount(summaryEntity.getNewCount() + 1);
-
+			break;
 		case INPROGRESS:
 			summaryEntity.setInProgressIngCount(summaryEntity.getInProgressIngCount() + 1);
+			break;
 		case PENDING:
 			summaryEntity.setPendingCount(summaryEntity.getPendingCount() + 1);
+			break;
 		case CLOSED:
 			summaryEntity.setClosedCount(summaryEntity.getClosedCount() + 1);
+			break;
+		case DELAY:
+			summaryEntity.setDelayCount(summaryEntity.getDelayCount() + 1);
+			break;
 		}
 
 	}

@@ -42,6 +42,11 @@ public class BackLogSummaryEntity {
 	 * Pending Count
 	 */
 	private int pendingCount;
+	
+	/**
+	 * Delay Count
+	 */
+	private int delayCount;
 
 	/**
 	 * In progressing count
@@ -119,6 +124,7 @@ public class BackLogSummaryEntity {
 		int result = 1;
 		result = prime * result + PlannedEstimatedHours;
 		result = prime * result + closedCount;
+		result = prime * result + delayCount;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + inProgressIngCount;
 		result = prime * result + initEstimatedHours;
@@ -141,6 +147,8 @@ public class BackLogSummaryEntity {
 		if (PlannedEstimatedHours != other.PlannedEstimatedHours)
 			return false;
 		if (closedCount != other.closedCount)
+			return false;
+		if (delayCount != other.delayCount)
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -168,6 +176,14 @@ public class BackLogSummaryEntity {
 
 	public void setPendingCount(int pendingCount) {
 		this.pendingCount = pendingCount;
+	}
+
+	public int getDelayCount() {
+		return delayCount;
+	}
+
+	public void setDelayCount(int delayCount) {
+		this.delayCount = delayCount;
 	}
 
 }

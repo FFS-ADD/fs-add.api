@@ -14,7 +14,7 @@ import com.accenture.fsadd.dashboard.backlog.business.entity.BackLogEntity.Statu
 @Repository
 public interface BackLogRepository extends CrudBaseRepository<BackLogEntity, BigInteger> {
 	
-	@Query(value="{'status':{'$not':{'$in':['?0']}}}")
+	@Query(value="{'status':{'$not':{'$in':?0}}}")
 	List<BackLogEntity> findByNotInStatus(Status[] status);
 
 }

@@ -1,96 +1,84 @@
 package com.accenture.fsadd.dashboard.issues.controller.Model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class IssueDailySummaryModel implements Serializable{
-
+public class IssueDailySummaryModel implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Date of the summary 
-	 */
-	private LocalDate day;
-	
-	/**
-	 * Date of the summary 
-	 */
-	@JsonProperty("date")
-	private String dayAsString;
 
 	/**
-	 * New count
+	 * News count
 	 */
 	@JsonProperty("news")
-	private int newCount;
+	private List<Integer> newCountList;
 
 	/**
-	 * In progressing count
+	 * In progressing Count
 	 */
 	@JsonProperty("inProgress")
-	private int inProgressIngCount;
+	private List<Integer> inProgressingCountList;
 
 	/**
-	 * Fixed count
+	 * Fixed Count
 	 */
 	@JsonProperty("fixed")
-	private int fixedCount;
+	private List<Integer> fixedCountList;
+
 	/**
-	 * Fixed count
+	 * Retesting Count
 	 */
-	@JsonProperty("retesting")
-	private int retestingCount;
+	@JsonProperty("reTesting")
+	private List<Integer> retestingCountList;
+
 	/**
-	 * Closed count
+	 * Closed Count
 	 */
-	@JsonProperty("close")
-	private int closedCount;
-	public LocalDate getDay() {
-		return day;
+	@JsonProperty("closed")
+	private List<Integer> closedCountList;
+
+	public List<Integer> getNewCountList() {
+		return newCountList;
 	}
-	public void setDay(LocalDate day) {
-		this.day = day;
+
+	public void setNewCountList(List<Integer> newCountList) {
+		this.newCountList = newCountList;
 	}
-	public String getDayAsString() {
-		return dayAsString;
+
+	public List<Integer> getInProgressingCountList() {
+		return inProgressingCountList;
 	}
-	public void setDayAsString(String dayAsString) {
-		this.dayAsString = dayAsString;
+
+	public void setInProgressingCountList(List<Integer> inProgressingCountList) {
+		this.inProgressingCountList = inProgressingCountList;
 	}
-	public int getNewCount() {
-		return newCount;
+
+	public List<Integer> getFixedCountList() {
+		return fixedCountList;
 	}
-	public void setNewCount(int newCount) {
-		this.newCount = newCount;
+
+	public void setFixedCountList(List<Integer> fixedCountList) {
+		this.fixedCountList = fixedCountList;
 	}
-	public int getInProgressIngCount() {
-		return inProgressIngCount;
+
+	public List<Integer> getRetestingCountList() {
+		return retestingCountList;
 	}
-	public void setInProgressIngCount(int inProgressIngCount) {
-		this.inProgressIngCount = inProgressIngCount;
+
+	public void setRetestingCountList(List<Integer> retestingCountList) {
+		this.retestingCountList = retestingCountList;
 	}
-	public int getFixedCount() {
-		return fixedCount;
+
+	public List<Integer> getClosedCountList() {
+		return closedCountList;
 	}
-	public void setFixedCount(int fixedCount) {
-		this.fixedCount = fixedCount;
-	}
-	public int getRetestingCount() {
-		return retestingCount;
-	}
-	public void setRetestingCount(int retestingCount) {
-		this.retestingCount = retestingCount;
-	}
-	public int getClosedCount() {
-		return closedCount;
-	}
-	public void setClosedCount(int closedCount) {
-		this.closedCount = closedCount;
+
+	public void setClosedCountList(List<Integer> closedCountList) {
+		this.closedCountList = closedCountList;
 	}
 }

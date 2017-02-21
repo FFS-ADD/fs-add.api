@@ -12,7 +12,7 @@ import org.springframework.data.annotation.Id;
 public class BackLogEntity {
 
 	public static enum Status {
-		NEW, INPROGRESS, CLOSED, PENDING
+		NEW, INPROGRESS, CLOSED, PENDING, DELAY
 	}
 
 	public static enum Stage {

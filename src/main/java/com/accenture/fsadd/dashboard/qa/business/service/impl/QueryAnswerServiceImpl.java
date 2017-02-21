@@ -49,7 +49,7 @@ public class QueryAnswerServiceImpl implements QueryAnswerService {
 	@Override
 	public List<QueryAnswerDailySummaryEntity> getDailySummaryService(LocalDate fromDay, LocalDate toDay) {
 		List<QueryAnswerDailySummaryEntity> dailySummaryList = queryAnswerDailySummaryRepository
-				.findByDayBetween(fromDay, toDay);
+				.findByDayBetween(fromDay.minusDays(1), toDay.plusDays(1));
 		if (dailySummaryList == null) {
 			dailySummaryList = new ArrayList<>();
 		}

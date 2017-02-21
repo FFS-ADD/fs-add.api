@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.accenture.fsadd.common.mvc.model.ApiModel;
 import com.accenture.fsadd.dashboard.issues.business.entity.IssueDailySummaryEntity;
 import com.accenture.fsadd.dashboard.issues.business.entity.IssueEntity;
+import com.accenture.fsadd.dashboard.issues.business.entity.IssueSummaryEntity;
 import com.accenture.fsadd.dashboard.issues.business.service.IssueService;
 import com.accenture.fsadd.dashboard.issues.controller.Model.IssueDailySummaryModel;
 import com.accenture.fsadd.dashboard.issues.controller.Model.IssueDetailModel;
@@ -45,13 +46,8 @@ public class IssueDetailController {
 			issueEntryModle.setPriorityAsString(this.getPriorityAsString(issueEntryModle.getPriority()));
 			issueEntryModelList.add(issueEntryModle);
 		});
-		result.setDailySummaryList(getDailySummaryModelList());
-		result.setDailyFixSummaryList(result.getDailySummaryList());
 		result.setOpenedIssueList(issueEntryModelList);
-		result.setDailyDateAsStringList(new ArrayList<>());
-		result.getDailySummaryList().forEach((dailySummary) -> {
-			result.getDailyDateAsStringList().add(dailySummary.getDayAsString());
-		});
+		setDailySummaryModelList(result);
 		return new ApiModel<>(result);
 
 	}
@@ -70,27 +66,46 @@ public class IssueDetailController {
 		return "";
 	}
 
-	private List<IssueDailySummaryModel> getDailySummaryModelList() {
+	private void setDailySummaryModelList(IssueDetailModel detailModel) {
 		LocalDate toDay = LocalDate.now();
 		LocalDate fromDay = toDay.minusDays(BACK_DAY_COUNT);
 
 		List<IssueDailySummaryEntity> dailySummaryList = issueService.getDailySummaryService(fromDay, toDay);
-		List<IssueDailySummaryModel> dailySummaryModelList = new ArrayList<>();
-		Map<LocalDate, IssueDailySummaryModel> dailySummaryModleMap = new HashMap<>();
-		for (int i = 0; i <= BACK_DAY_COUNT; i++) {
-			IssueDailySummaryModel dailySummaryModel = new IssueDailySummaryModel();
-			dailySummaryModel.setDay(fromDay.plusDays(i));
-			dailySummaryModel.setDayAsString(this.getDayAsString(fromDay.plusDays(i), PATTERN_MM_DD));
-			dailySummaryModelList.add(dailySummaryModel);
-			dailySummaryModleMap.put(dailySummaryModel.getDay(), dailySummaryModel);
-		}
-		dailySummaryList.forEach((dailySummaryEntity) -> {
-			IssueDailySummaryModel dailySummaryModel = dailySummaryModleMap.get(dailySummaryEntity.getDay());
-			if (dailySummaryModel != null) {
-				BeanUtils.copyProperties(dailySummaryEntity.getSummaryEntity(), dailySummaryModel);
-			}
+		Map<LocalDate, IssueSummaryEntity> summaryEntityMap = new HashMap<>();
+		dailySummaryList.forEach((issueDailySummaryEntity) -> {
+			summaryEntityMap.put(issueDailySummaryEntity.getDay(), issueDailySummaryEntity.getSummaryEntity());
 		});
-		return dailySummaryModelList;
+
+		IssueDailySummaryModel dailySummary = new IssueDailySummaryModel();
+		dailySummary.setNewCountList(new ArrayList<>());
+		dailySummary.setInProgressingCountList(new ArrayList<>());
+		dailySummary.setRetestingCountList(new ArrayList<>());
+		dailySummary.setClosedCountList(new ArrayList<>());
+		dailySummary.setFixedCountList(new ArrayList<>());
+		detailModel.setDailySummary(dailySummary);
+		detailModel.setDailyFixSummary(dailySummary);
+
+		detailModel.setDailyDateAsStringList(new ArrayList<>());
+
+		for (int i = 0; i <= BACK_DAY_COUNT; i++) {
+			detailModel.getDailyDateAsStringList().add(this.getDayAsString(fromDay.plusDays(i), PATTERN_MM_DD));
+			IssueSummaryEntity issueSummaryEntity = summaryEntityMap.get(fromDay.plusDays(i));
+			if (issueSummaryEntity == null) {
+				dailySummary.getClosedCountList().add(0);
+				dailySummary.getFixedCountList().add(0);
+				dailySummary.getInProgressingCountList().add(0);
+				dailySummary.getNewCountList().add(0);
+				dailySummary.getRetestingCountList().add(0);
+
+			} else {
+				dailySummary.getClosedCountList().add(issueSummaryEntity.getClosedCount());
+				dailySummary.getFixedCountList().add(issueSummaryEntity.getFixedCount());
+				dailySummary.getInProgressingCountList().add(issueSummaryEntity.getInProgressIngCount());
+				dailySummary.getNewCountList().add(issueSummaryEntity.getNewCount());
+				dailySummary.getRetestingCountList().add(issueSummaryEntity.getRetestingCount());
+			}
+		}
+
 	}
 
 	private String getDayAsString(LocalDate date, String pattern) {

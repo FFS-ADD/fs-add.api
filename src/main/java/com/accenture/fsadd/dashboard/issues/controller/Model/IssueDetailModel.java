@@ -11,34 +11,18 @@ public class IssueDetailModel implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1890025718129265627L;
-	
+
 	@JsonProperty("bugDetailsHistoryData")
-	private List<IssueDailySummaryModel> dailySummaryList;
-	
+	private IssueDailySummaryModel dailySummary;
+
 	@JsonProperty("bugFixHistoryData")
-	private List<IssueDailySummaryModel> dailyFixSummaryList;
-	
+	private IssueDailySummaryModel dailyFixSummary;
+
 	@JsonProperty("redmindingBugList")
 	private List<IssueEntryModle> openedIssueList;
-	
+
 	@JsonProperty("historyDate")
 	private List<String> dailyDateAsStringList;
-
-	public List<IssueDailySummaryModel> getDailySummaryList() {
-		return dailySummaryList;
-	}
-
-	public void setDailySummaryList(List<IssueDailySummaryModel> dailySummaryList) {
-		this.dailySummaryList = dailySummaryList;
-	}
-
-	public List<IssueDailySummaryModel> getDailyFixSummaryList() {
-		return dailyFixSummaryList;
-	}
-
-	public void setDailyFixSummaryList(List<IssueDailySummaryModel> dailyFixSummaryList) {
-		this.dailyFixSummaryList = dailyFixSummaryList;
-	}
 
 	public List<IssueEntryModle> getOpenedIssueList() {
 		return openedIssueList;
@@ -55,5 +39,22 @@ public class IssueDetailModel implements Serializable {
 	public void setDailyDateAsStringList(List<String> dailyDateAsStringList) {
 		this.dailyDateAsStringList = dailyDateAsStringList;
 	}
+
+	public IssueDailySummaryModel getDailySummary() {
+		return dailySummary;
+	}
+
+	public void setDailySummary(IssueDailySummaryModel dailySummary) {
+		this.dailySummary = dailySummary;
+	}
+
+	public IssueDailySummaryModel getDailyFixSummary() {
+		return dailyFixSummary;
+	}
+
+	public void setDailyFixSummary(IssueDailySummaryModel dailyFixSummary) {
+		this.dailyFixSummary = dailyFixSummary;
+	}
+
 
 }
