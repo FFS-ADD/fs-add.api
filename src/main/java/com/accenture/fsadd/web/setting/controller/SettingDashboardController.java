@@ -11,9 +11,6 @@ import com.accenture.fsadd.web.setting.form.ThresholdProfileForm;
 @RequestMapping("/websetting")
 public class SettingDashboardController {
 
-//	@Autowired
-//	private UserService userService;
-
 
 	@RequestMapping("/getProjectsInfo")
 	public void getProjectsInfo(){
