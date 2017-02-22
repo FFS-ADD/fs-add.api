@@ -4,7 +4,6 @@ import java.math.BigInteger;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.springframework.security.core.userdetails.UserDetails;
 
 public class User {
 
@@ -27,6 +26,21 @@ public class User {
 	 * Roles
 	 */
 	private String role;
+
+	/**
+	 * avatar
+	 */
+	private String avatar;
+
+	/**
+	 * fristName
+	 */
+	private String fristName;
+
+	/**
+	 * lastName
+	 */
+	private String lastName;
 
 	public BigInteger getId() {
 		return id;
@@ -64,5 +78,28 @@ public class User {
 	public String toString() {
 		return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
-	
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getFristName() {
+        return fristName;
+    }
+
+    public void setFristName(String fristName) {
+        this.fristName = fristName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 }
