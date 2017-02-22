@@ -36,6 +36,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return userRepository.findByEmail(email);
 	}
 
+	public User saveUser(User user) {
+		return userRepository.save(user);
+	}
+
+	public void deleteUser(User user) {
+		userRepository.delete(user);
+	}
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = this.getUserByEmail(username);

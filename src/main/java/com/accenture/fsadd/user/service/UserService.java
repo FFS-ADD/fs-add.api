@@ -11,4 +11,8 @@ public interface UserService {
 	User registerUser(User user);
 	
 	User getUserByEmail(String email);
+
+	User saveUser(User user);
+
+	void deleteUser(User user);
 }
