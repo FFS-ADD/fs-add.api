@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.accenture.fsadd.common.APIExecutedStatusType;
+import com.accenture.fsadd.common.mvc.model.CommonModel;
 import com.accenture.fsadd.user.service.UserService;
 import com.accenture.fsadd.web.author.form.WebDashboardLoginForm;
 
@@ -25,7 +27,14 @@ public class AuthorDashboardController {
      * @return ApiModel<QualityGateModel>
      */
 	@RequestMapping("/login")
-	public void loginAction(@RequestBody WebDashboardLoginForm form){
-		userService.userLogin(form);
+	public CommonModel loginAction(@RequestBody WebDashboardLoginForm form){
+		boolean loginflg = userService.userLogin(form);
+		CommonModel apiMdole = new CommonModel(); 
+		if (!loginflg) {
+	        apiMdole.setStatus(APIExecutedStatusType.ERROR.getValue());
+		} else {
+		    apiMdole.setStatus(APIExecutedStatusType.SUCCESS.getValue());
+		}
+		return apiMdole;
 	}
 }
