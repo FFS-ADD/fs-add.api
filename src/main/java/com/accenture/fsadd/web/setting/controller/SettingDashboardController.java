@@ -57,8 +57,8 @@ public class SettingDashboardController {
 		return apiMdole;
 	}
 
-	@RequestMapping(value = "/createProject", method = RequestMethod.POST)
-	public ApiModel<List<ThresholdModel>> createProject(@RequestBody ThresholdProfileForm from){
+	@RequestMapping(value = "/createThreshold", method = RequestMethod.POST)
+	public ApiModel<List<ThresholdModel>> createThreshold(@RequestBody ThresholdProfileForm from){
 		settingService.createThreshold(from);
 		List<ThresholdModel> entity = settingService.findAllValidThresholdsInfo();
 		ApiModel<List<ThresholdModel>> apiMdole = new ApiModel<>(entity); 
