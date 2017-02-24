@@ -1,7 +1,7 @@
 package com.accenture.fsadd.web.setting.form;
 
 public class ThresholdProfileForm {
-	private Integer no;
+	private String id;
 	private String project;
 	private String system;
 	private String catalog;
@@ -10,13 +10,13 @@ public class ThresholdProfileForm {
 	private String rain;
 	private String noticeMsg;
 
-	public Integer getNo() {
-		return no;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setNo(Integer no) {
-		this.no = no;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
 	public String getProject() {
 		return project;

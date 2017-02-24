@@ -4,13 +4,15 @@ import java.math.BigInteger;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.data.annotation.Id;
 
 public class User {
 
 	/**
 	 * ID
 	 */
-	private BigInteger id;
+    @Id
+	private String id;
 
 	/**
 	 * Email Address
@@ -35,18 +37,31 @@ public class User {
 	/**
 	 * fristName
 	 */
-	private String fristName;
+	private String firstName;
 
 	/**
 	 * lastName
 	 */
 	private String lastName;
 
-	public BigInteger getId() {
+	/**
+	 * project
+	 */
+	private String project;
+
+	public String getProject() {
+        return project;
+    }
+
+    public void setProject(String project) {
+        this.project = project;
+    }
+
+    public String getId() {
 		return id;
 	}
 
-	public void setId(BigInteger id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -87,19 +102,19 @@ public class User {
         this.avatar = avatar;
     }
 
-    public String getFristName() {
-        return fristName;
-    }
-
-    public void setFristName(String fristName) {
-        this.fristName = fristName;
-    }
-
     public String getLastName() {
         return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 }

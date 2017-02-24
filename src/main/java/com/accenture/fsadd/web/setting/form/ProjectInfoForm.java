@@ -3,18 +3,18 @@ package com.accenture.fsadd.web.setting.form;
 import java.time.LocalDate;
 
 public class ProjectInfoForm {
-	private Integer no;
+	private String id;
 	private String projectName;
 	private String projectStatus;
 	private LocalDate updateDay;
 	private LocalDate endDay;
 
-	public Integer getNo() {
-		return no;
+	public String getId() {
+		return id;
 	}
 
-	public void setNo(Integer no) {
-		this.no = no;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getProjectName() {

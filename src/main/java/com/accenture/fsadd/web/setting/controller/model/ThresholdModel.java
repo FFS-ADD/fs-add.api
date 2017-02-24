@@ -2,7 +2,10 @@ package com.accenture.fsadd.web.setting.controller.model;
 
 import java.math.BigInteger;
 
+import org.springframework.data.annotation.Id;
+
 public class ThresholdModel {
+    @Id
 	private BigInteger id;
 	private BigInteger projectNo;
 	private String project;

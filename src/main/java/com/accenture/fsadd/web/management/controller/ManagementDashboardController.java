@@ -1,14 +1,16 @@
 package com.accenture.fsadd.web.management.controller;
 
-import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.accenture.fsadd.common.APIExecutedStatusType;
 import com.accenture.fsadd.common.mvc.model.ApiModel;
@@ -16,6 +18,7 @@ import com.accenture.fsadd.user.entity.User;
 import com.accenture.fsadd.user.service.UserService;
 import com.accenture.fsadd.web.management.controller.model.PhotoModel;
 
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/webmanagement")
 public class ManagementDashboardController {
@@ -41,6 +44,7 @@ public class ManagementDashboardController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ApiModel<List<User>> createUser(@RequestBody User createUser){
+	    createUser.setId(null);
 		userService.registerUser(createUser);
 		List<User> entity = userService.findAllValidUsers();
 		ApiModel<List<User>> apiMdole = new ApiModel<>(entity); 
@@ -66,8 +70,9 @@ public class ManagementDashboardController {
 		return apiMdole;
 	}
 
-	@RequestMapping("/photoupload")
-	public ApiModel<PhotoModel> fileUpload(File file) {
+    @RequestMapping(value = "/photoupload", headers = "Content-Type= multipart/form-data", method = RequestMethod.POST)
+    public ApiModel<PhotoModel> fileUpload(@RequestParam("name") String name,
+            @RequestParam(value = "file", required = true) MultipartFile file) {
 	    PhotoModel model = new PhotoModel();
 
         ApiModel<PhotoModel> apiMdole = new ApiModel<>(model); 

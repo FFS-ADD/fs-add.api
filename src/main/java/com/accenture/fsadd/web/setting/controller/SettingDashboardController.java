@@ -3,6 +3,7 @@ package com.accenture.fsadd.web.setting.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import com.accenture.fsadd.web.setting.form.ThresholdProfileForm;
 import com.accenture.fsadd.web.setting.service.SettingService;
 
 @RestController
+@CrossOrigin(origins="http://localhost:5555")
 @RequestMapping("/websetting")
 public class SettingDashboardController {
 

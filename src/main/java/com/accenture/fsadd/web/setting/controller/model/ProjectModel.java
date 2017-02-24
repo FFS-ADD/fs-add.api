@@ -3,7 +3,10 @@ package com.accenture.fsadd.web.setting.controller.model;
 import java.math.BigInteger;
 import java.time.LocalDate;
 
+import org.springframework.data.annotation.Id;
+
 public class ProjectModel {
+    @Id
     private BigInteger id;
     private String projectName;
     private String projectStatus;
