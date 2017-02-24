@@ -1,22 +1,21 @@
 package com.accenture.fsadd.web.setting.controller.model;
 
-import java.math.BigInteger;
-import java.time.LocalDate;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 
 public class ProjectModel {
     @Id
-    private BigInteger id;
+    private String id;
     private String projectName;
     private String projectStatus;
-    private LocalDate updateDay;
-    private LocalDate endDay;
+    private Date updateDay;
+    private Date endDay;
 
-	public BigInteger getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(BigInteger id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getProjectName() {
@@ -31,16 +30,16 @@ public class ProjectModel {
 	public void setProjectStatus(String projectStatus) {
 		this.projectStatus = projectStatus;
 	}
-	public LocalDate getUpdateDay() {
+	public Date getUpdateDay() {
 		return updateDay;
 	}
-	public void setUpdateDay(LocalDate updateDay) {
+	public void setUpdateDay(Date updateDay) {
 		this.updateDay = updateDay;
 	}
-	public LocalDate getEndDay() {
+	public Date getEndDay() {
 		return endDay;
 	}
-	public void setEndDay(LocalDate endDay) {
+	public void setEndDay(Date endDay) {
 		this.endDay = endDay;
 	}
 }

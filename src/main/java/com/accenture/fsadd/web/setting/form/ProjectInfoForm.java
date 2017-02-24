@@ -1,13 +1,13 @@
 package com.accenture.fsadd.web.setting.form;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class ProjectInfoForm {
 	private String id;
 	private String projectName;
 	private String projectStatus;
-	private LocalDate updateDay;
-	private LocalDate endDay;
+	private Date updateDay;
+	private Date endDay;
 
 	public String getId() {
 		return id;
@@ -33,19 +33,19 @@ public class ProjectInfoForm {
 		this.projectStatus = projectStatus;
 	}
 
-	public LocalDate getUpdateDay() {
+	public Date getUpdateDay() {
 		return updateDay;
 	}
 
-	public void setUpdateDay(LocalDate updateDay) {
+	public void setUpdateDay(Date updateDay) {
 		this.updateDay = updateDay;
 	}
 
-	public LocalDate getEndDay() {
+	public Date getEndDay() {
 		return endDay;
 	}
 
-	public void setEndDay(LocalDate endDay) {
+	public void setEndDay(Date endDay) {
 		this.endDay = endDay;
 	}
 }

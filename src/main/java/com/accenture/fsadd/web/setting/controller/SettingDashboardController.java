@@ -51,7 +51,7 @@ public class SettingDashboardController {
 		return apiMdole;
 	}
 	
-	@RequestMapping("/getThresholdInfo")
+	@RequestMapping(value = "/getThresholdInfo", method = RequestMethod.GET)
 	public ApiModel<List<ThresholdModel>> getThresholdInfo(){
 		List<ThresholdModel> entity = settingService.findAllValidThresholdsInfo();
 		ApiModel<List<ThresholdModel>> apiMdole = new ApiModel<>(entity); 
@@ -68,7 +68,7 @@ public class SettingDashboardController {
 		return apiMdole;
 	}
 	
-	@RequestMapping("/updateThreshold")
+	@RequestMapping(value = "/updateThreshold", method = RequestMethod.POST)
 	public ApiModel<List<ThresholdModel>> updateThreshold(@RequestBody ThresholdProfileForm from){
 		settingService.updateThreshold(from);
 		List<ThresholdModel> entity = settingService.findAllValidThresholdsInfo();
@@ -77,7 +77,7 @@ public class SettingDashboardController {
 		return apiMdole;
 	}
 	
-	@RequestMapping("/deleteThreshold")
+	@RequestMapping(value = "/deleteThreshold", method = RequestMethod.POST)
 	public ApiModel<List<ThresholdModel>> deleteThreshold(@RequestBody ThresholdProfileForm from){
 		settingService.deleteThreshold(from);
 		List<ThresholdModel> entity = settingService.findAllValidThresholdsInfo();

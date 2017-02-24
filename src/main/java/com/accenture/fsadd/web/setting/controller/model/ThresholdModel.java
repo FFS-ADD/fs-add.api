@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 
 public class ThresholdModel {
     @Id
-	private BigInteger id;
+	private String id;
 	private BigInteger projectNo;
 	private String project;
 	private String system;
@@ -16,10 +16,10 @@ public class ThresholdModel {
 	private String rain;
 	private String noticeMsg;
 
-	public BigInteger getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(BigInteger id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public BigInteger getProjectNo() {
