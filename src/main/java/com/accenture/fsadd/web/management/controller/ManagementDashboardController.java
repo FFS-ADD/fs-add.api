@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accenture.fsadd.common.APIExecutedStatusType;
@@ -29,8 +31,35 @@ public class ManagementDashboardController {
      * @param form
      * @return ApiModel<QualityGateModel>
      */
-	@RequestMapping("/getUserListInfo")
+	@RequestMapping(value = "/getUserListInfo", method = RequestMethod.GET)
 	public ApiModel<List<User>> getUserListInfo(){
+		List<User> entity = userService.findAllValidUsers();
+		ApiModel<List<User>> apiMdole = new ApiModel<>(entity); 
+		apiMdole.setStatus(APIExecutedStatusType.SUCCESS.getValue());
+		return apiMdole;
+	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public ApiModel<List<User>> createUser(@RequestBody User createUser){
+		userService.registerUser(createUser);
+		List<User> entity = userService.findAllValidUsers();
+		ApiModel<List<User>> apiMdole = new ApiModel<>(entity); 
+		apiMdole.setStatus(APIExecutedStatusType.SUCCESS.getValue());
+		return apiMdole;
+	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public ApiModel<List<User>> updateUser(@RequestBody User createUser){
+		userService.saveUser(createUser);
+		List<User> entity = userService.findAllValidUsers();
+		ApiModel<List<User>> apiMdole = new ApiModel<>(entity); 
+		apiMdole.setStatus(APIExecutedStatusType.SUCCESS.getValue());
+		return apiMdole;
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public ApiModel<List<User>> deleteUser(@RequestBody User createUser){
+		userService.deleteUser(createUser);
 		List<User> entity = userService.findAllValidUsers();
 		ApiModel<List<User>> apiMdole = new ApiModel<>(entity); 
 		apiMdole.setStatus(APIExecutedStatusType.SUCCESS.getValue());
