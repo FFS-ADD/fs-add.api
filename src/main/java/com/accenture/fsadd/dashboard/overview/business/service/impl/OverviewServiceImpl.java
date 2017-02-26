@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.accenture.fsadd.dashboard.backlog.business.entity.BackLogSummaryEntity;
 import com.accenture.fsadd.dashboard.backlog.business.service.BackLogService;
+import com.accenture.fsadd.dashboard.codequality.business.service.SonarDashboardService;
 import com.accenture.fsadd.dashboard.issues.business.entity.IssueSummaryEntity;
 import com.accenture.fsadd.dashboard.issues.business.service.IssueService;
 import com.accenture.fsadd.dashboard.overview.business.HealthType;
@@ -25,7 +26,6 @@ import com.accenture.fsadd.dashboard.qa.business.entity.QueryAnswerSummaryEntity
 import com.accenture.fsadd.dashboard.qa.business.service.QueryAnswerService;
 import com.accenture.fsadd.dashboard.task.business.entity.TaskSummaryEntity;
 import com.accenture.fsadd.dashboard.task.business.service.TaskService;
-import com.accenture.fsadd.sonar.business.service.SonarDashboardService;
 import com.accenture.fsadd.web.setting.controller.model.ProjectModel;
 import com.accenture.fsadd.web.setting.service.SettingService;
 
