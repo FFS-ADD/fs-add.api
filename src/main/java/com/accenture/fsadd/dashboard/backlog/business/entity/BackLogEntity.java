@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import org.springframework.data.annotation.Id;
 
 /**
- * Issue Entity
+ * Backlog Entity
  *
  */
 public class BackLogEntity {
@@ -16,7 +16,7 @@ public class BackLogEntity {
 	}
 
 	public static enum Stage {
-		ANALYSIS, DESGIN, DEVELOPMENT, TEST, DEPLOYMENT
+		ANALYSIS, DESGIN, BUILD, TEST, DEPLOYMENT
 	}
 
 	public static enum Priority {

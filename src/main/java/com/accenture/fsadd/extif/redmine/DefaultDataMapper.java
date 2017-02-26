@@ -220,28 +220,6 @@ public class DefaultDataMapper implements ExtIfDataMapper {
 	@SuppressWarnings("unchecked")
 	protected void mapToBackLog(LocalDateTime lastExecutedTime, RedmineSetting redmineSetting, BasicDBObject dbObject,
 			Set<BigInteger> backLogIds) {
-
-		// {"_id":{"$oid":"58a592f5e93eb94e7c8a73b7"},"_class":"com.mongodb.BasicDBObject","id":11694,"project":{"id":23,"name":"FFG
-		// -
-		// iBank"},"tracker":{"id":42,"name":"10_作業"},"status":{"id":96,"name":"85_中止"},"priority":{"id":2,"name":"3
-		// Medium"},"author":{"id":98,"name":"Liu 劉
-		// 波"},"assigned_to":{"id":99,"name":"Zhang 張
-		// 忠鵬"},"fixed_version":{"id":118,"name":"Day1.6_Sprint開発"},
-		// "subject":"CRSの要件開発","description":"CRSの要件が大体決まったので、開発に着手しています。
-		// \r\n\r\n現状の実装案概要資料を添付します。","start_date":"2016-10-24","due_date":"2016-11-09",
-		// "done_ratio":100,"custom_fields":[{"id":5,"name":"予定開始日（当初）","value":""},{"id":6,"name":"予定終了日（当初）","value":""},{"id":333,"name":"ソート順","value":""}],"created_on":"2016-10-24T02:29:52Z","updated_on":"2016-11-17T05:29:50Z","closed_on":"2016-10-26T01:20:18Z"}
-
-		// {"_id":{"$oid":"58a592f5e93eb94e7c8a73b6"},"_class":"com.mongodb.BasicDBObject","id":11695,"project":{"id":23,"name":"FFG
-		// -
-		// iBank"},"tracker":{"id":46,"name":"11_作業(モバイル開発)"},"status":{"id":96,"name":"85_中止"},"priority":{"id":2,"name":"3
-		// Medium"},"author":{"id":98,"name":"Liu 劉
-		// 波"},"assigned_to":{"id":99,"name":"Zhang 張
-		// 忠鵬"},"fixed_version":{"id":118,"name":"Day1.6_Sprint開発"},"parent":{"id":11694},"subject":"Mobile_CRSの要件開発",
-		// "description":"","start_date":"2016-10-24","due_date":"2016-11-04","done_ratio":0,
-		// "custom_fields":[{"id":5,"name":"予定開始日（当初）","value":""},{"id":6,"name":"予定終了日（当初）","value":""},
-		// {"id":333,"name":"ソート順","value":""}],"created_on":"2016-10-24T02:31:54Z","updated_on":"2016-10-26T01:20:38Z",
-		// "closed_on":"2016-10-26T01:20:38Z"}
-
 		if (dbObject.get("parent") != null) {
 			return;
 		}
@@ -328,7 +306,7 @@ public class DefaultDataMapper implements ExtIfDataMapper {
 		taskEntity.setId(BigInteger.valueOf(dbObject.getInt("id")));
 		taskEntity.setType(redmineSetting.getTaskSetting().getTrackerId().get(trackerId));
 		if (taskEntity.getType() == null) {
-			taskEntity.setType(TaskEntity.Type.DEVELOPMENT);
+			taskEntity.setType(TaskEntity.Type.BUILD);
 		}
 		taskEntity.setCreatedOn(converIOSDateTime(dbObject.getString("created_on")));
 		taskEntity.setUpdatedOn(converIOSDateTime(dbObject.getString("updated_on")));

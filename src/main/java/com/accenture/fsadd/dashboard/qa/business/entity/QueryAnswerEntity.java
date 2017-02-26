@@ -2,7 +2,6 @@ package com.accenture.fsadd.dashboard.qa.business.entity;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.Id;
 

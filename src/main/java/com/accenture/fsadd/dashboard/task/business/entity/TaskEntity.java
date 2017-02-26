@@ -20,7 +20,7 @@ public class TaskEntity {
 	}
 
 	public static enum Type {
-		ANALYSIS, DESGIN, DEVELOPMENT, TEST, DEPLOYMENT
+		ANALYSIS, DESGIN, BUILD, TEST, DEPLOYMENT
 	}
 
 	/**

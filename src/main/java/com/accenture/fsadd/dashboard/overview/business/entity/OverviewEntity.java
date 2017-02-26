@@ -12,7 +12,7 @@ import org.springframework.data.annotation.Id;
 public class OverviewEntity {
 
 	public static enum Health {
-		GOOD, WARNING, NOTGOOD
+		GOOD, WARNING, BAD
 	}
 
 	public static enum EventType {

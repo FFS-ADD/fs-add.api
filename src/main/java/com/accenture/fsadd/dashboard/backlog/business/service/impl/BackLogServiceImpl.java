@@ -166,7 +166,7 @@ public class BackLogServiceImpl implements BackLogService {
 		case DESGIN:
 			backLogEnity.setStage(BackLogEntity.Stage.DESGIN);
 			break;
-		case DEVELOPMENT:
+		case BUILD:
 			backLogEnity.setStage(BackLogEntity.Stage.DEPLOYMENT);
 			break;
 		case TEST:
