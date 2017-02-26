@@ -1,5 +1,6 @@
 package com.accenture.fsadd.extif;
 
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 
+import com.accenture.fsadd.dashboard.overview.business.service.OverviewService;
 import com.accenture.fsadd.extif.entity.ExtIfRunnerControlCommand;
 import com.accenture.fsadd.extif.entity.ExtIfRunnerControlCommand.Command;
 import com.accenture.fsadd.extif.entity.ExtIfRunnerSetting;
@@ -26,6 +28,9 @@ public class ExtIfRunner implements Runnable {
 
 	@Autowired
 	private ExtIfService extIfService;
+	
+	@Autowired
+	private OverviewService overviewService;
 
 	private ThreadPoolTaskScheduler scheduler;
 
@@ -92,7 +97,7 @@ public class ExtIfRunner implements Runnable {
 					}
 					ExtIfDataMapper mapper = extIfMapperMap.get(extIfName);
 					if (mapper != null) {
-						mapper.map(status.getLastExecutedOn());
+						mapper.map(LocalDateTime.now());
 					}
 					extIfService.updateExtIfStatus(extIfName, Status.COMPLETED, "ended from ExtIfRunner");
 					log.info("{} external if successed.", extIfName);
@@ -103,6 +108,7 @@ public class ExtIfRunner implements Runnable {
 				log.error("ExtIf Runner error.", e);
 			}
 		});
+		overviewService.aggregateService(LocalDateTime.now());
 		log.info("ExtIf Runner End");
 
 	}

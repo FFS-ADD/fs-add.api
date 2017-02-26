@@ -85,6 +85,11 @@ public class IssueServiceImpl implements IssueService {
 				summary.setClosedCount(summary.getClosedCount() + 1);
 			}
 
+			if (issue.getStatus() != Status.CLOSED && issue.getDueDate() != null
+					&& issue.getDueDate().isAfter(executeDate)) {
+				summary.setDelayedCount(summary.getDelayedCount() + 1);
+			}
+
 			summary.setTotalCount(summary.getNewCount() + summary.getFixedCount() + summary.getRetestingCount()
 					+ summary.getClosedCount() + summary.getInProgressIngCount());
 		}

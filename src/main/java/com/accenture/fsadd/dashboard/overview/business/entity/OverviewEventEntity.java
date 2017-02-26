@@ -60,4 +60,12 @@ public class OverviewEventEntity {
 		this.eventTye = eventTye;
 	}
 
+	public BigInteger getId() {
+		return id;
+	}
+
+	public void setId(BigInteger id) {
+		this.id = id;
+	}
+
 }

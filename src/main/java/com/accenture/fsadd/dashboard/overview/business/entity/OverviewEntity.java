@@ -2,8 +2,11 @@ package com.accenture.fsadd.dashboard.overview.business.entity;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.Id;
+
+import com.accenture.fsadd.dashboard.overview.business.HealthType;
 
 /**
  * Project Overview Entity
@@ -11,9 +14,6 @@ import org.springframework.data.annotation.Id;
  */
 public class OverviewEntity {
 
-	public static enum Health {
-		GOOD, WARNING, BAD
-	}
 
 	public static enum EventType {
 		INFO, WARNING
@@ -38,12 +38,12 @@ public class OverviewEntity {
 	/**
 	 * Health
 	 */
-	private Health health;
+	private HealthType health;
 
 	/**
 	 * Updated On
 	 */
-	private LocalDate lastUpdateOn;
+	private LocalDateTime lastUpdateTimeOn;
 
 	public BigInteger getId() {
 		return id;
@@ -65,20 +65,22 @@ public class OverviewEntity {
 		this.releaseName = releaseName;
 	}
 
-	public Health getHealth() {
+	public HealthType getHealth() {
 		return health;
 	}
 
-	public void setHealth(Health health) {
+	public void setHealth(HealthType health) {
 		this.health = health;
 	}
 
-	public LocalDate getLastUpdateOn() {
-		return lastUpdateOn;
+	public LocalDateTime getLastUpdateTimeOn() {
+		return lastUpdateTimeOn;
 	}
 
-	public void setLastUpdateOn(LocalDate lastUpdateOn) {
-		this.lastUpdateOn = lastUpdateOn;
+	public void setLastUpdateTimeOn(LocalDateTime lastUpdateTimeOn) {
+		this.lastUpdateTimeOn = lastUpdateTimeOn;
 	}
+
+
 
 }

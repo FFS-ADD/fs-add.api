@@ -1,10 +1,9 @@
 package com.accenture.fsadd.dashboard.overview.business.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
-import com.accenture.fsadd.dashboard.issues.business.entity.IssueDailySummaryEntity;
-import com.accenture.fsadd.dashboard.issues.business.entity.IssueEntity;
 import com.accenture.fsadd.dashboard.overview.business.entity.OverviewEntity;
 import com.accenture.fsadd.dashboard.overview.business.entity.OverviewEventEntity;
 
@@ -46,7 +45,7 @@ public interface OverviewService {
 	 * @param executeDate
 	 *            Aggregate Date
 	 */
-	void aggregateService(LocalDate executeDate);
+	void aggregateService(LocalDateTime executeDateTime);
 
 	/**
 	 * insert or update a Event
@@ -63,5 +62,6 @@ public interface OverviewService {
 	 *            list of events
 	 */
 	void insertEvent(List<OverviewEventEntity> overviewEventEntityList);
+	
 
 }

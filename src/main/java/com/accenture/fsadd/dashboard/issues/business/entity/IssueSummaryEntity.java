@@ -40,6 +40,11 @@ public class IssueSummaryEntity {
 	 * Closed count
 	 */
 	private int closedCount;
+	
+	/**
+	 * Delay count
+	 */
+	private int delayedCount;
 
 	public int getTotalCount() {
 		return totalCount;
@@ -92,6 +97,14 @@ public class IssueSummaryEntity {
 
 	public void setRetestingCount(int retestingCount) {
 		this.retestingCount = retestingCount;
+	}
+
+	public int getDelayedCount() {
+		return delayedCount;
+	}
+
+	public void setDelayedCount(int delayedCount) {
+		this.delayedCount = delayedCount;
 	}
 
 }
