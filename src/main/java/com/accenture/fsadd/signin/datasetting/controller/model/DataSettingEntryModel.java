@@ -36,6 +36,12 @@ public class DataSettingEntryModel implements Serializable{
 	private boolean bug;
 	
 	/**
+	 * qa
+	 */
+	@JsonProperty("qa")
+	private boolean qa;
+
+	/**
 	 * qualityGate
 	 */
 	@JsonProperty("qualitygate")
@@ -107,6 +113,13 @@ public class DataSettingEntryModel implements Serializable{
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public boolean isQa() {
+		return qa;
+	}
+	public void setQa(boolean qa) {
+		this.qa = qa;
 	}
 	
 }

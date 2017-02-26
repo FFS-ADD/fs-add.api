@@ -33,6 +33,11 @@ public class DataSettingEntity {
 	private boolean bug;
 	
 	/**
+	 * qa
+	 */
+	private boolean qa;
+
+	/**
 	 * qualityGate
 	 */
 	private boolean qualitygate;
@@ -100,5 +105,12 @@ public class DataSettingEntity {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public boolean isQa() {
+		return qa;
+	}
+	public void setQa(boolean qa) {
+		this.qa = qa;
 	}
 }
