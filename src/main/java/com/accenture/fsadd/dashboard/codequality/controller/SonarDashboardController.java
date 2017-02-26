@@ -1,4 +1,4 @@
-package com.accenture.fsadd.sonar.controller;
+package com.accenture.fsadd.dashboard.codequality.controller;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.accenture.fsadd.common.APIExecutedStatusType;
 import com.accenture.fsadd.common.mvc.model.ApiModel;
-import com.accenture.fsadd.sonar.business.entity.Sonardashboard;
-import com.accenture.fsadd.sonar.business.service.SonarDashboardService;
-import com.accenture.fsadd.sonar.controller.model.CoverageModel;
-import com.accenture.fsadd.sonar.controller.model.DuplicationModel;
-import com.accenture.fsadd.sonar.controller.model.LocModel;
-import com.accenture.fsadd.sonar.controller.model.QualityGateModel;
+import com.accenture.fsadd.dashboard.codequality.business.entity.Sonardashboard;
+import com.accenture.fsadd.dashboard.codequality.business.service.SonarDashboardService;
+import com.accenture.fsadd.dashboard.codequality.controller.model.CoverageModel;
+import com.accenture.fsadd.dashboard.codequality.controller.model.DuplicationModel;
+import com.accenture.fsadd.dashboard.codequality.controller.model.LocModel;
+import com.accenture.fsadd.dashboard.codequality.controller.model.QualityGateModel;
 
 @RestController
 @RequestMapping("/sonardashboard")
@@ -21,9 +21,7 @@ public class SonarDashboardController {
 
 	@Autowired
 	private SonarDashboardService sonarDashboardService;
-	
-	@Value("${fsadd.sonarqube.project}")
-	private String projectKey;
+
 	   /**
      * get qualityDate data from sonar dashboard
      * @param form
@@ -33,7 +31,7 @@ public class SonarDashboardController {
 	public ApiModel<QualityGateModel> getQualityDateAction(){
 		
 		QualityGateModel model = new QualityGateModel();
-		Sonardashboard entity = sonarDashboardService.getSonarDashboard(projectKey);
+		Sonardashboard entity = sonarDashboardService.getSonarDashboard();
 		if(entity != null){
 			BeanUtils.copyProperties(entity, model);
 		}
@@ -50,7 +48,7 @@ public class SonarDashboardController {
 	@RequestMapping("/getLoc")
 	public ApiModel<LocModel> getLocAction(){
 		LocModel model = new LocModel();
-		Sonardashboard entity = sonarDashboardService.getSonarDashboard(projectKey);
+		Sonardashboard entity = sonarDashboardService.getSonarDashboard();
 		if(entity != null){
 			BeanUtils.copyProperties(entity, model);
 		}
@@ -67,7 +65,7 @@ public class SonarDashboardController {
 	@RequestMapping("/getCoverage")
 	public ApiModel<CoverageModel> getCoverageAction(){
 		CoverageModel model = new CoverageModel();
-		Sonardashboard entity = sonarDashboardService.getSonarDashboard(projectKey);
+		Sonardashboard entity = sonarDashboardService.getSonarDashboard();
 		if(entity != null){
 			BeanUtils.copyProperties(entity, model);
 		}
@@ -84,7 +82,7 @@ public class SonarDashboardController {
 	@RequestMapping("/getDuplication")
 	public ApiModel<DuplicationModel> getDuplicationModelAction(){
 		DuplicationModel model = new DuplicationModel();
-		Sonardashboard entity = sonarDashboardService.getSonarDashboard(projectKey);
+		Sonardashboard entity = sonarDashboardService.getSonarDashboard();
 		if(entity != null){
 			BeanUtils.copyProperties(entity, model);
 			model.setLine(entity.getdLine());

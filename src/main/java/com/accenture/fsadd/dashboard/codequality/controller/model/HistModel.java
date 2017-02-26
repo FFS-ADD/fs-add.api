@@ -1,9 +1,8 @@
-package com.accenture.fsadd.sonar.controller.model;
+package com.accenture.fsadd.dashboard.codequality.controller.model;
 
 import java.util.List;
 
-import com.accenture.fsadd.common.mvc.model.CommonModel;
-import com.accenture.fsadd.sonar.business.entity.Sonardashboard;
+import com.accenture.fsadd.dashboard.codequality.business.entity.Sonardashboard;
 
 public class HistModel{
 	/**

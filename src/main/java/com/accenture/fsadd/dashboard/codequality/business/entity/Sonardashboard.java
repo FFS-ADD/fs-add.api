@@ -1,12 +1,13 @@
-package com.accenture.fsadd.sonar.business.entity;
+package com.accenture.fsadd.dashboard.codequality.business.entity;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
 public class Sonardashboard {
 	@Id
-	private String id;
+	private ObjectId id;
 	
 	private String projectKey;
 	
@@ -205,11 +206,11 @@ public class Sonardashboard {
 		this.dFile = dFile;
 	}
 	
-	public String getId() {
+	public ObjectId getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(ObjectId id) {
 		this.id = id;
 	}
 

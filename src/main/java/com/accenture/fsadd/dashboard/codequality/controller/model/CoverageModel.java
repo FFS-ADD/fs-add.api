@@ -1,4 +1,4 @@
-package com.accenture.fsadd.sonar.controller.model;
+package com.accenture.fsadd.dashboard.codequality.controller.model;
 
 import com.accenture.fsadd.common.mvc.model.CommonModel;
 

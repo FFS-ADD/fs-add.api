@@ -1,4 +1,4 @@
-package com.accenture.fsadd.sonar.business.entity;
+package com.accenture.fsadd.dashboard.codequality.business.entity;
 
 public class ProjectStatus {
 	String status;

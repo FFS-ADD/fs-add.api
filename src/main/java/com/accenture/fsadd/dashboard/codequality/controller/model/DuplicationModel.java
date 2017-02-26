@@ -1,6 +1,4 @@
-package com.accenture.fsadd.sonar.controller.model;
-
-import com.accenture.fsadd.common.mvc.model.CommonModel;
+package com.accenture.fsadd.dashboard.codequality.controller.model;
 
 public class DuplicationModel{
 	/**

@@ -1,7 +1,6 @@
 package com.enoteshare;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -10,12 +9,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.bson.types.ObjectId;
 import org.jboss.logging.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,16 +42,13 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.data.mongodb.core.query.TextQuery;
 import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.client.RestTemplate;
 
 import com.accenture.fsadd.common.FsaddConstant;
-import com.accenture.fsadd.sonar.business.entity.Sonardashboard;
-import com.accenture.fsadd.sonar.business.service.SonarDashboardService;
+import com.accenture.fsadd.common.FsaddUtil;
+import com.accenture.fsadd.dashboard.codequality.business.entity.Sonardashboard;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.util.JSON;
@@ -460,14 +456,18 @@ public class TestMongoDBJunit {
 //		componentObject.put("getAt", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
 //		mongoTemplate.insert(componentObject,"sonarqube_issues");
 //		assertNotNull(parseResult);
-		String sonarresult = mongoTemplate.findOne(
-				new Query(Criteria.where(FsaddConstant.SONARQUBE_ISSUES_KEY).is("")).with(new Sort(Direction.DESC, FsaddConstant.INSERT_DATA_COL)), String.class, "sonarqube_issues");
-		DBObject sonarObject = (DBObject)JSON.parse(sonarresult);
-		List<DBObject> list = (List<DBObject>)sonarObject.get("measures");
-		for(DBObject object : list){
-			String value = object.get("value").toString();
-			assertNotNull(value);
-		}
+//		String sonarresult = mongoTemplate.findOne(
+//				new Query(Criteria.where(FsaddConstant.SONARQUBE_ISSUES_KEY).is("")).with(new Sort(Direction.DESC, FsaddConstant.INSERT_DATA_COL)), String.class, "sonarqube_issues");
+		String now = FsaddUtil.convertLocaldateTimeToString(LocalDateTime.now(),FsaddConstant.DATE_FORMAT_YY_MM_DD);
+		Sonardashboard todaySonardashboard = mongoTemplate.findOne(new Query(Criteria.where("createDate").is(now)), Sonardashboard.class,"sonardashboard");
+
+//		DBObject sonarObject = (DBObject)JSON.parse(todaySonardashboard);
+		ObjectId list = todaySonardashboard.getId();
+//		ObjectId list = (ObjectId)sonarObject.get("_id");
+//		for(DBObject object : list){
+//			String value = object.get("value").toString();
+//			assertNotNull(value);
+//		}
 	}
 	
 	public static class MapReduceResult {

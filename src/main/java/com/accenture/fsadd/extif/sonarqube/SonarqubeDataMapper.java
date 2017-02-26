@@ -1,13 +1,12 @@
 package com.accenture.fsadd.extif.sonarqube;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -19,30 +18,27 @@ import org.springframework.util.StringUtils;
 
 import com.accenture.fsadd.common.FsaddConstant;
 import com.accenture.fsadd.common.FsaddUtil;
-import com.accenture.fsadd.sonar.business.entity.Sonardashboard;
+import com.accenture.fsadd.dashboard.codequality.business.entity.Sonardashboard;
+import com.accenture.fsadd.extif.ExtIfDataMapper;
+import com.accenture.fsadd.extif.entity.SonarQubeSetting;
+import com.accenture.fsadd.extif.service.ExtIfService;
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
 
 @Component
 @ConfigurationProperties
-public class SonarqubeDataMapping {
+public class SonarqubeDataMapper implements ExtIfDataMapper  {
+	@Autowired
+	private ExtIfService extIfService;
 	
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
-	@Autowired
-	private SonarqubeSetting sonarqubeSetting;
-	
-	@Value("${fsadd.sonarqube.mongodb.collection.sonardashboard}")
-	private String sonardashboardCollectionName;
-	
-	@Value("${fsadd.sonarqube.project}")
-	private String projectKey;
-	
-	public void mappingDataToSonarDashboard(){
+	public void map(LocalDateTime lastExecutedTime){
+		SonarQubeSetting sonarQubeSetting = extIfService.getExtIfSetting().getSonarQubeSetting();
 		// get sonarqube date
 		String result = mongoTemplate.findOne(
-				new Query(Criteria.where(FsaddConstant.SONARQUBE_ISSUES_KEY).is(projectKey)).with(new Sort(Direction.DESC, FsaddConstant.INSERT_DATA_COL)), String.class, sonarqubeSetting.getIssueCollectionName());
+				new Query(Criteria.where(FsaddConstant.SONARQUBE_ISSUES_KEY).is(sonarQubeSetting.getProjectKey())).with(new Sort(Direction.DESC, FsaddConstant.INSERT_DATA_COL)), String.class, sonarQubeSetting.getIssuesCollectionName());
 		DBObject dbObject = (DBObject)JSON.parse(result);
 		@SuppressWarnings("unchecked")
 		List<DBObject> list = (List<DBObject>)dbObject.get(FsaddConstant.SONARQUBE_MEASURES_KEY);
@@ -59,13 +55,22 @@ public class SonarqubeDataMapping {
 		}
 		
 		// mapping sonarqube date to sonardashboard data
-		Sonardashboard sonardashboard = createSonardashboardEntity(sonarMap);
+		Sonardashboard newSonardashboard = createSonardashboardEntity(sonarMap,sonarQubeSetting.getProjectKey());
 		
-		// create sonardashboard data
-		mongoTemplate.insert(sonardashboard, sonardashboardCollectionName);
+		// get today sonarqube
+		Sonardashboard todaySonardashboard = mongoTemplate.findOne(new Query(Criteria.where("createDate").is(FsaddUtil.convertLocaldateTimeToString(LocalDateTime.now(),FsaddConstant.DATAE_FORMAT_YYYYMMDD))), Sonardashboard.class);
+		if(todaySonardashboard != null){
+			BeanUtils.copyProperties(newSonardashboard, todaySonardashboard,"id");
+			// update today's sonardashboard data
+			mongoTemplate.save(todaySonardashboard, sonarQubeSetting.getDashboardCollectionName());
+		}else{
+			// today's sonardashboard is not exist,insert it
+			mongoTemplate.save(newSonardashboard, sonarQubeSetting.getDashboardCollectionName());			
+		}
+		
 	}
 	
-	private Sonardashboard createSonardashboardEntity(Map<String, String> sonarMap){
+	private Sonardashboard createSonardashboardEntity(Map<String, String> sonarMap,String projectKey){
 		Sonardashboard sonardashboard = new Sonardashboard();
 		
 		// set quality gate
@@ -102,7 +107,7 @@ public class SonarqubeDataMapping {
 		sonardashboard.setdFile(FsaddUtil.nullOrEmptyToZero(sonarMap.get("duplicated_files")));
 		
 		// set createdate
-		sonardashboard.setCreateDate(FsaddUtil.convertLocaldateTimeToString(LocalDateTime.now(),FsaddConstant.DATAE_FORMAT_YYYYMMDDHHMMSS));
+		sonardashboard.setCreateDate(FsaddUtil.convertLocaldateTimeToString(LocalDateTime.now(),FsaddConstant.DATAE_FORMAT_YYYYMMDD));
 		sonardashboard.setProjectKey(projectKey);
 		return sonardashboard;
 	}
