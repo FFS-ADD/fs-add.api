@@ -1,0 +1,5 @@
+projectKey=fs-add.api
+serverUrl=http://localhost:9000/sonar
+dashboardUrl=http://localhost:9000/sonar/dashboard/index/fs-add.api
+ceTaskId=AVo8BUmcoMW0fdRQNQJ8
+ceTaskUrl=http://localhost:9000/sonar/api/ce/task?id=AVo8BUmcoMW0fdRQNQJ8

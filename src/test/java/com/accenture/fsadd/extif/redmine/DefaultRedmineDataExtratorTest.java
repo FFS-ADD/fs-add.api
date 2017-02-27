@@ -16,7 +16,7 @@ import com.accenture.fsadd.extif.service.ExtIfService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DefaultDataExtratorTest {
+public class DefaultRedmineDataExtratorTest {
 
 	@Autowired
 	private ExtIfService extIfService;
@@ -26,7 +26,7 @@ public class DefaultDataExtratorTest {
 
 	// @Test
 	public void testRedmineDataExtrator1() {
-		DefaultDataExtrator extrator = new DefaultDataExtrator();
+		DefaultRedmineDataExtrator extrator = new DefaultRedmineDataExtrator();
 		extrator.setExtIfService(extIfService);
 		extrator.setMongoTemplate(mongoTemplate);
 		extrator.extrator(null);

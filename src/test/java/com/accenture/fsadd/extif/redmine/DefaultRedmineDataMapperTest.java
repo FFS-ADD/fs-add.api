@@ -18,7 +18,7 @@ import com.accenture.fsadd.extif.service.ExtIfService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DefaultDataMapperTest {
+public class DefaultRedmineDataMapperTest {
 	
 
 	@Autowired
@@ -41,7 +41,7 @@ public class DefaultDataMapperTest {
 	
 	@Test
 	public void testMap() {
-		DefaultDataMapper dataMapper = new DefaultDataMapper();
+		DefaultRedmineDataMapper dataMapper = new DefaultRedmineDataMapper();
 		dataMapper.setExtIfService(extIfService);
 		dataMapper.setMongoTemplate(mongoTemplate);
 		dataMapper.setQueryAnswerService(queryAnswerService);

@@ -26,7 +26,7 @@ import com.mongodb.util.JSON;
 
 @Component
 @ConfigurationProperties
-public class SonarqubeDataMapper implements ExtIfDataMapper  {
+public class DefaultSonarQubeDataMapper implements ExtIfDataMapper  {
 	@Autowired
 	private ExtIfService extIfService;
 	

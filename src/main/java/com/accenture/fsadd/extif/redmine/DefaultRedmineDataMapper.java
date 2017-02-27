@@ -28,7 +28,7 @@ import com.accenture.fsadd.extif.entity.RedmineSetting;
 import com.accenture.fsadd.extif.service.ExtIfService;
 import com.mongodb.BasicDBObject;
 
-public class DefaultDataMapper implements ExtIfDataMapper {
+public class DefaultRedmineDataMapper implements ExtIfDataMapper {
 
 	@Autowired
 	private ExtIfService extIfService;

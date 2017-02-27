@@ -10,9 +10,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 import com.accenture.fsadd.extif.ExtIfRunner;
+import com.accenture.fsadd.extif.sonarqube.DefaultSonarQubeDataExtrator;
+import com.accenture.fsadd.extif.sonarqube.DefaultSonarQubeDataMapper;
 
 @Configuration
 public class ExfIfConfig {
+	
+	@Bean 
+	public DefaultSonarQubeDataExtrator getDefaultSonarQubeDataExtrator(){
+		return new DefaultSonarQubeDataExtrator();
+	}
+	
+	@Bean 
+	public DefaultSonarQubeDataMapper getDefaultSonarQubeDataMapper(){
+		return new DefaultSonarQubeDataMapper();
+	}
 //	
 //	@Bean
 //	public ExtIfRunner getExtIfRunner(){

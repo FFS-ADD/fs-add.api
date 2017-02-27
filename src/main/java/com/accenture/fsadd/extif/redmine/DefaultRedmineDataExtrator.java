@@ -24,7 +24,7 @@ import com.accenture.fsadd.extif.service.ExtIfService;
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
 
-public class DefaultDataExtrator implements ExtIfDataExtrator {
+public class DefaultRedmineDataExtrator implements ExtIfDataExtrator {
 
 	@Autowired
 	private ExtIfService extIfService;

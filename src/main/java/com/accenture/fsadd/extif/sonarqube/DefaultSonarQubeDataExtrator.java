@@ -19,7 +19,7 @@ import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
 
 @Component
-public class SonarqubeDataExtrator  implements ExtIfDataExtrator{
+public class DefaultSonarQubeDataExtrator  implements ExtIfDataExtrator{
 	
 	@Autowired
 	private ExtIfService extIfService;
