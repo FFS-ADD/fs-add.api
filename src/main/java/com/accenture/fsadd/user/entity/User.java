@@ -1,7 +1,5 @@
 package com.accenture.fsadd.user.entity;
 
-import java.math.BigInteger;
-
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
@@ -11,7 +9,7 @@ public class User {
 	/**
 	 * ID
 	 */
-    @Id
+	@Id
 	private String id;
 
 	/**
@@ -49,15 +47,28 @@ public class User {
 	 */
 	private String project;
 
+	/**
+	 * status
+	 */
+	private String status;
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public String getProject() {
-        return project;
-    }
+		return project;
+	}
 
-    public void setProject(String project) {
-        this.project = project;
-    }
+	public void setProject(String project) {
+		this.project = project;
+	}
 
-    public String getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -94,27 +105,27 @@ public class User {
 		return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 
-    public String getAvatar() {
-        return avatar;
-    }
+	public String getAvatar() {
+		return avatar;
+	}
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 }

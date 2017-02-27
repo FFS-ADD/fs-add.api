@@ -57,6 +57,20 @@ public class UserEntryModel implements Serializable{
 	 */
     @JsonProperty("project")
 	private String project;
+    
+    /**
+	 * status
+	 */
+    @JsonProperty("status")
+    private String status;
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public String getId() {
 		return id;
