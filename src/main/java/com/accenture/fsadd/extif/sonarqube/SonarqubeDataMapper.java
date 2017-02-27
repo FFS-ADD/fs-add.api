@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.domain.Sort;
@@ -60,14 +59,11 @@ public class SonarqubeDataMapper implements ExtIfDataMapper  {
 		// get today sonarqube
 		Sonardashboard todaySonardashboard = mongoTemplate.findOne(new Query(Criteria.where("createDate").is(FsaddUtil.convertLocaldateTimeToString(LocalDateTime.now(),FsaddConstant.DATAE_FORMAT_YYYYMMDD))), Sonardashboard.class);
 		if(todaySonardashboard != null){
-			BeanUtils.copyProperties(newSonardashboard, todaySonardashboard,"id");
-			// update today's sonardashboard data
-			mongoTemplate.save(todaySonardashboard, sonarQubeSetting.getDashboardCollectionName());
-		}else{
-			// today's sonardashboard is not exist,insert it
-			mongoTemplate.save(newSonardashboard, sonarQubeSetting.getDashboardCollectionName());			
+			newSonardashboard.setId(todaySonardashboard.getId());		
 		}
-		
+
+		// insert sonardashboard
+		mongoTemplate.save(newSonardashboard, sonarQubeSetting.getDashboardCollectionName());	
 	}
 	
 	private Sonardashboard createSonardashboardEntity(Map<String, String> sonarMap,String projectKey){

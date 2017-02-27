@@ -25,9 +25,6 @@ public class ManagementDashboardController {
 
 	@Autowired
 	private UserService userService;
-	
-	@Value("${fsadd.sonarqube.project}")
-	private String projectKey;
 
    /**
      * get qualityDate data from sonar dashboard
