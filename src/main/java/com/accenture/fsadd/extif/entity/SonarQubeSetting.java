@@ -1,14 +1,11 @@
 package com.accenture.fsadd.extif.entity;
 
-import com.accenture.fsadd.common.FsaddConstant;
-
 public class SonarQubeSetting {
 	private String rootUrl;
 	private String measuresUrl;
 	private String projectKey;
 	private String dashboardCollectionName;
 	private String issuesCollectionName;
-	private String sonarqubeUrl;
 	
 	public String getRootUrl() {
 		return rootUrl;
@@ -43,7 +40,5 @@ public class SonarQubeSetting {
 	public String getSonarqubeUrl() {
 		return this.rootUrl + this.measuresUrl+this.projectKey;
 	}
-	public void setSonarqubeUrl(String sonarqubeUrl) {
-		this.sonarqubeUrl = sonarqubeUrl;
-	}
+
 }
