@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.accenture.fsadd.dashboard.backlog.business.entity.BackLogSummaryEntity;
 import com.accenture.fsadd.dashboard.backlog.business.service.BackLogService;
+import com.accenture.fsadd.dashboard.codequality.business.entity.Sonardashboard;
 import com.accenture.fsadd.dashboard.codequality.business.service.SonarDashboardService;
 import com.accenture.fsadd.dashboard.issues.business.entity.IssueSummaryEntity;
 import com.accenture.fsadd.dashboard.issues.business.service.IssueService;
@@ -84,7 +85,6 @@ public class OverviewServiceImpl implements OverviewService {
 	public void aggregateService(LocalDateTime executeDateTime) {
 		List<ThresholdLimitEnity> thresholdLimitEnityList = this.getThresholdLimitListService();
 		HealthType projectHealthType = HealthType.GOOD;
-		BigInteger id = BigInteger.valueOf(overviewEventRepository.count());
 		for (ThresholdLimitEnity thresholdLimitEnity : thresholdLimitEnityList) {
 			HealthType healthType = null;
 			switch (thresholdLimitEnity.getType()) {
@@ -113,20 +113,23 @@ public class OverviewServiceImpl implements OverviewService {
 			} else if (healthType == HealthType.WARNING) {
 				if (projectHealthType != HealthType.BAD) {
 					projectHealthType = HealthType.WARNING;
-					overviewEventEntity = new OverviewEventEntity();
-					overviewEventEntity.setEventTye(OverviewEventEntity.EventType.WARNING);
-					overviewEventEntity.setEvent(thresholdLimitEnity.getCriticalMessage());
 				}
+				overviewEventEntity = new OverviewEventEntity();
+				overviewEventEntity.setEventTye(OverviewEventEntity.EventType.WARNING);
+				overviewEventEntity.setEvent(thresholdLimitEnity.getCriticalMessage());
+
 			}
-			if (overviewEventEntity != null) {
-				id = id.add(BigInteger.ONE);
+			if (overviewEventEntity != null && healthType != null) {
+				String id = executeDateTime.toLocalDate().toString() + "@" + thresholdLimitEnity.getType() + "@"
+						+ healthType.toString();
 				overviewEventEntity.setId(id);
 				overviewEventEntity.setEventDate(executeDateTime.toLocalDate());
-				overviewEventRepository.insert(overviewEventEntity);
+				overviewEventRepository.save(overviewEventEntity);
 
 			}
 
 		}
+
 		List<ProjectModel> projectModelList = settingService.findAllValidProjectsInfo();
 		String projectName = "fsadd";
 		if (projectModelList.size() > 0) {
@@ -194,7 +197,7 @@ public class OverviewServiceImpl implements OverviewService {
 		thresholdLimitEntity.setLowerLimitString("warning");
 		thresholdLimitEntity.setUpperLimitString("warning");
 		thresholdLimitEntity.setWarningMessage("Warning: Health check of source code was failed!");
-		thresholdLimitEntity.setWarningMessage("Warning: Health check of source code was failed!");
+		thresholdLimitEntity.setCriticalMessage("Critical:Health check of source code was failed!");
 		result.add(thresholdLimitEntity);
 
 		return result;
@@ -204,8 +207,7 @@ public class OverviewServiceImpl implements OverviewService {
 	protected HealthType checkBacklogHealthService(ThresholdLimitEnity entity) {
 
 		BackLogSummaryEntity backLogSummaryEntity = backLogSerivce.getSummaryService();
-		double delayRate = backLogSummaryEntity.getDelayCount()*1.0
-				/ (backLogSummaryEntity.getTotalCount());
+		double delayRate = backLogSummaryEntity.getDelayCount() * 1.0 / (backLogSummaryEntity.getTotalCount());
 		if (delayRate >= entity.getLowerLimit() && delayRate < entity.getUpperLimit()) {
 			return HealthType.WARNING;
 		}
@@ -219,8 +221,7 @@ public class OverviewServiceImpl implements OverviewService {
 	protected HealthType checkTaskHealthService(ThresholdLimitEnity entity) {
 
 		TaskSummaryEntity taskSummaryEntity = taskService.getSummaryService();
-		double delayRate = taskSummaryEntity.getDelayCount()*1.0
-				/ (taskSummaryEntity.getTotalCount());
+		double delayRate = taskSummaryEntity.getDelayCount() * 1.0 / (taskSummaryEntity.getTotalCount());
 		if (delayRate >= entity.getLowerLimit() && delayRate < entity.getUpperLimit()) {
 			return HealthType.WARNING;
 		}
@@ -233,7 +234,7 @@ public class OverviewServiceImpl implements OverviewService {
 
 	protected HealthType checkQaHealthService(ThresholdLimitEnity entity) {
 		QueryAnswerSummaryEntity queryAnswerSummaryEntity = queryAnswerService.getSummaryService();
-		double delayRate = queryAnswerSummaryEntity.getOverdueCount()*1.0
+		double delayRate = queryAnswerSummaryEntity.getOverdueCount() * 1.0
 				/ (queryAnswerSummaryEntity.getTotalCount());
 		if (delayRate >= entity.getLowerLimit() && delayRate < entity.getUpperLimit()) {
 			return HealthType.WARNING;
@@ -248,8 +249,7 @@ public class OverviewServiceImpl implements OverviewService {
 	protected HealthType checkBugHealthService(ThresholdLimitEnity entity) {
 
 		IssueSummaryEntity issueSummaryEntity = issueSerivce.getSummaryService();
-		double delayRate = issueSummaryEntity.getDelayedCount()*1.0
-				/ (issueSummaryEntity.getTotalCount());
+		double delayRate = issueSummaryEntity.getDelayedCount() * 1.0 / (issueSummaryEntity.getTotalCount());
 		if (delayRate >= entity.getLowerLimit() && delayRate < entity.getUpperLimit()) {
 			return HealthType.WARNING;
 		}
@@ -260,14 +260,13 @@ public class OverviewServiceImpl implements OverviewService {
 	}
 
 	protected HealthType checkSourceHealthService(ThresholdLimitEnity entity) {
-		//TODO
-//		Sonardashboard sonardashboard = sonarDashboardService.getSonarDashboard("");
-//		if (entity.getLowerLimitString().equals(sonardashboard.getQualityGateStatus())) {
-//			return HealthType.WARNING;
-//		}
-//		if (entity.getUpperLimitString().equals(sonardashboard.getQualityGateStatus())) {
-//			return HealthType.BAD;
-//		}
+		Sonardashboard sonardashboard = sonarDashboardService.getSonarDashboard();
+		if (entity.getUpperLimitString().equals(sonardashboard.getQualityGateStatus())) {
+			return HealthType.BAD;
+		}
+		if (entity.getLowerLimitString().equals(sonardashboard.getQualityGateStatus())) {
+			return HealthType.WARNING;
+		}
 
 		return HealthType.GOOD;
 

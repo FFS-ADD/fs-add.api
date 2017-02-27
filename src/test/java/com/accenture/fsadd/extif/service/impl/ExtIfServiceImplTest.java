@@ -167,6 +167,9 @@ public class ExtIfServiceImplTest {
 			taskStatusMap.put(7, TaskEntity.Status.PENDING);
 			taskStatusMap.put(5, TaskEntity.Status.CLOSED);
 			taskSetting.setStatusMappingSetting(taskStatusMap);
+			taskSetting.setCustomIdActualEndDate(6);
+			taskSetting.setCustomIdActualHours(4);
+			taskSetting.setCustomIdActualStartDate(5);
 			redmineSetting.setTaskSetting(taskSetting);
 			// BackLog Setting
 			BackLogSetting backLogSetting = new BackLogSetting();
@@ -188,6 +191,10 @@ public class ExtIfServiceImplTest {
 			taskStatusMap.put(7, TaskEntity.Status.PENDING);
 			taskStatusMap.put(5, TaskEntity.Status.CLOSED);
 			backLogSetting.setStatusMappingSetting(backLogStatusMap);
+			
+			backLogSetting.setCustomIdActualEndDate(6);
+			backLogSetting.setCustomIdActualHours(4);
+			backLogSetting.setCustomIdActualStartDate(5);
 
 			redmineSetting.setBackLogSetting(backLogSetting);
 
@@ -196,14 +203,14 @@ public class ExtIfServiceImplTest {
 			// tracker.setBugId(28);
 			// tracker.setTaskId(new int[]{42, 43, 46, 47, 48});
 			redmineSetting.setQaSetting(qaSetting);
-			redmineSetting.setRootUrl("");
-			redmineSetting.setHttpHeaders("Authorization:Basic");
+			redmineSetting.setRootUrl("http://localhost:8888/redmine/");
+			redmineSetting.setHttpHeaders("Authorization:Basic ZXh0aWY6ZnNhZGQjMTExMQ==");
 			redmineSetting.setIssueUrl("issues.json");
-			redmineSetting.setFixVersionId("118");
+			redmineSetting.setFixVersionId("");
 			redmineSetting.setIssueCollectionName("redmine_issues");
 			redmineSetting.setLimit(100);
 			ExtIfRunnerSetting extIfRunnerSetting = new ExtIfRunnerSetting();
-			extIfRunnerSetting.setCronExpression("*/5 * * * * ?");
+			extIfRunnerSetting.setCronExpression("*/10 * * * * ?");
 			extIfSetting.setRedmineSetting(redmineSetting);
 			extIfSetting.setExtIfRunnerSetting(extIfRunnerSetting);
 

@@ -30,10 +30,11 @@ public class MessageModel implements Serializable {
     /**
      * メッセージパラメーター。
      */
-    private Object[] arguments;
+    private Object[] arguments = null;
 
     public MessageModel() {
 
+    	this("", "", null);
     }
 
     public MessageModel(String messageCode, String labelId, Object[] arguments) {

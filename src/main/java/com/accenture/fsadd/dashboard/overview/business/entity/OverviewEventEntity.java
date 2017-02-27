@@ -19,7 +19,7 @@ public class OverviewEventEntity {
 	 * ID
 	 */
 	@Id
-	private BigInteger id;
+	private String id;
 
 	/**
 	 * Event Date
@@ -60,12 +60,13 @@ public class OverviewEventEntity {
 		this.eventTye = eventTye;
 	}
 
-	public BigInteger getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(BigInteger id) {
+	public void setId(String id) {
 		this.id = id;
 	}
+
 
 }

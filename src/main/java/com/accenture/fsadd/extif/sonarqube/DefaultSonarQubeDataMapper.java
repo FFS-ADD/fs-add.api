@@ -24,7 +24,6 @@ import com.accenture.fsadd.extif.service.ExtIfService;
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
 
-@Component
 @ConfigurationProperties
 public class DefaultSonarQubeDataMapper implements ExtIfDataMapper  {
 	@Autowired

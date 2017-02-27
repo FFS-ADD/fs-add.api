@@ -32,13 +32,12 @@ public class DefaultRedmineDataExtrator implements ExtIfDataExtrator {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 
-
 	@Override
 	public void extrator(LocalDateTime lastExecutedTime) {
 		extractIssues(lastExecutedTime);
 
 	}
-	
+
 	/**
 	 * Extract the issues from Redmine
 	 * 
@@ -71,7 +70,9 @@ public class DefaultRedmineDataExtrator implements ExtIfDataExtrator {
 			// Get all status of the issues
 			requestParam.put("status_id", "*");
 			// Get the target version
-			requestParam.put("fixed_version_id", redmineSetting.getFixVersionId());
+			if (!StringUtils.isEmpty(redmineSetting.getFixVersionId())) {
+				requestParam.put("fixed_version_id", redmineSetting.getFixVersionId());
+			}
 			// Set the limit in one request
 			requestParam.put("limit", String.valueOf(redmineSetting.getLimit()));
 			// Set the offset

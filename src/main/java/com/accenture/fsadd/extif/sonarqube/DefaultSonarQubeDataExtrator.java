@@ -18,7 +18,6 @@ import com.accenture.fsadd.extif.service.ExtIfService;
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
 
-@Component
 public class DefaultSonarQubeDataExtrator  implements ExtIfDataExtrator{
 	
 	@Autowired

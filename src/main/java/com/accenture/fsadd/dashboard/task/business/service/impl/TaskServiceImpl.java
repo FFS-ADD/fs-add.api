@@ -79,7 +79,7 @@ public class TaskServiceImpl implements TaskService {
 		for (TaskEntity task : taskList) {
 			// Setting the count in according to status
 			if (task.getStatus() == Status.NEW || task.getStatus() == Status.INPROGRESS) {
-				if (task.getPlanedEndDate().isAfter(executedDay)) {
+				if (executedDay.isAfter(task.getPlanedEndDate())) {
 					dailySummary.setDelayCount(dailySummary.getDelayCount() + 1);
 				} else {
 					dailySummary.setOnSheduleCount(dailySummary.getOnSheduleCount() + 1);

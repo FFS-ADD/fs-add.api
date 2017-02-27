@@ -86,7 +86,7 @@ public class IssueServiceImpl implements IssueService {
 			}
 
 			if (issue.getStatus() != Status.CLOSED && issue.getDueDate() != null
-					&& issue.getDueDate().isAfter(executeDate)) {
+					&& executeDate.isAfter(issue.getDueDate())) {
 				summary.setDelayedCount(summary.getDelayedCount() + 1);
 			}
 

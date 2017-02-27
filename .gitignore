@@ -27,5 +27,5 @@ nbdist/
 .mvn
 
 ##sonar##
-.sonar
+.sonar/
 sonar-project.properties

@@ -1,5 +1,6 @@
 package com.accenture.fsadd.extif.redmine;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.Test;
@@ -24,12 +25,12 @@ public class DefaultRedmineDataExtratorTest {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 
-	// @Test
+	 @Test
 	public void testRedmineDataExtrator1() {
 		DefaultRedmineDataExtrator extrator = new DefaultRedmineDataExtrator();
 		extrator.setExtIfService(extIfService);
 		extrator.setMongoTemplate(mongoTemplate);
-		extrator.extrator(null);
+		extrator.extrator(LocalDateTime.now());
 	}
 
 
