@@ -111,22 +111,26 @@ public class ExtIfServiceImplTest {
 			// Issue Setting
 			IssueSetting issueSetting = new IssueSetting();
 			tempSet = new HashSet<>();
-			tempSet.add(28);
+			tempSet.add(1);
 			issueSetting.setTrackerId(tempSet);
 			Map<Integer, IssueEntity.Status> issueStatusMap = new HashMap<>();
-			issueStatusMap.put(97, IssueEntity.Status.CLOSED);
-			issueStatusMap.put(95, IssueEntity.Status.CLOSED);
-			issueStatusMap.put(96, IssueEntity.Status.CLOSED);
-			issueStatusMap.put(94, IssueEntity.Status.RETESTING);
+			issueStatusMap.put(1, IssueEntity.Status.NEW);
+			issueStatusMap.put(2, IssueEntity.Status.INPROGRESS);
+			issueStatusMap.put(4, IssueEntity.Status.INPROGRESS);
+			issueStatusMap.put(3, IssueEntity.Status.FIXED);
+			issueStatusMap.put(8, IssueEntity.Status.RETESTING);
+			issueStatusMap.put(5, IssueEntity.Status.CLOSED);
+			issueStatusMap.put(6, IssueEntity.Status.CLOSED);
 			issueSetting.setStatusMappingSetting(issueStatusMap);
 
 			Map<Integer, IssueEntity.Priority> issuepriorityMappingSetting = new HashMap<>();
+			issuepriorityMappingSetting.put(5, IssueEntity.Priority.CRITICAL);
 			issuepriorityMappingSetting.put(4, IssueEntity.Priority.CRITICAL);
 			issuepriorityMappingSetting.put(3, IssueEntity.Priority.HIGH);
 			issuepriorityMappingSetting.put(2, IssueEntity.Priority.MEDIUM);
 			issuepriorityMappingSetting.put(1, IssueEntity.Priority.LOW);
 			issueSetting.setPriorityMappingSetting(issuepriorityMappingSetting);
-			issueSetting.setCustomIdPhase(158);
+			issueSetting.setCustomIdPhase(999999);
 			Map<String, IssueEntity.Phase> issuePhaseMappingSetting = new HashMap<>();
 			issuePhaseMappingSetting.put("01 ITa", IssueEntity.Phase.ITA);
 			issuePhaseMappingSetting.put("02 ITb1 - オンラインIF疎通検証", IssueEntity.Phase.ITB);
@@ -135,20 +139,21 @@ public class ExtIfServiceImplTest {
 			issuePhaseMappingSetting.put("03 ITb2 - 多機種検証", IssueEntity.Phase.ITB);
 			issuePhaseMappingSetting.put("06 行員試行", IssueEntity.Phase.UAT);
 			issueSetting.setPhaseMappingSetting(issuePhaseMappingSetting);
-			issueSetting.setCustomIdDetector(115);
-			issueSetting.setCustomIdOccuredDate(314);
+			issueSetting.setCustomIdDetector(1);
+			issueSetting.setCustomIdOccuredDate(3);
 			redmineSetting.setIssueSetting(issueSetting);
 
 			// Task Setting
 			TaskSetting taskSetting = new TaskSetting();
 			Map<Integer, TaskEntity.Type> trackerIdMap = new HashMap<>();
-			trackerIdMap.put(43, TaskEntity.Type.DEVELOPMENT);
-			trackerIdMap.put(42, TaskEntity.Type.DEVELOPMENT);
-			trackerIdMap.put(46, TaskEntity.Type.DEVELOPMENT);
-			trackerIdMap.put(47, TaskEntity.Type.DEVELOPMENT);
-			trackerIdMap.put(40, TaskEntity.Type.DEPLOYMENT);
+			trackerIdMap.put(4, TaskEntity.Type.ANALYSIS);
+			trackerIdMap.put(5, TaskEntity.Type.DESGIN);
+			trackerIdMap.put(8, TaskEntity.Type.BUILD);
+			trackerIdMap.put(6, TaskEntity.Type.TEST);
+			trackerIdMap.put(7, TaskEntity.Type.DEPLOYMENT);
 			taskSetting.setTrackerId(trackerIdMap);
 			Map<Integer, TaskEntity.Priority> taskPriorityMappingSetting = new HashMap<>();
+			taskPriorityMappingSetting.put(5, TaskEntity.Priority.CRITICAL);
 			taskPriorityMappingSetting.put(4, TaskEntity.Priority.CRITICAL);
 			taskPriorityMappingSetting.put(3, TaskEntity.Priority.HIGH);
 			taskPriorityMappingSetting.put(2, TaskEntity.Priority.MEDIUM);
@@ -156,20 +161,20 @@ public class ExtIfServiceImplTest {
 			taskSetting.setPriorityMappingSetting(taskPriorityMappingSetting);
 
 			Map<Integer, TaskEntity.Status> taskStatusMap = new HashMap<>();
-			taskStatusMap.put(73, TaskEntity.Status.NEW);
-			taskStatusMap.put(75, TaskEntity.Status.INPROGRESS);
-			taskStatusMap.put(91, TaskEntity.Status.INPROGRESS);
-			taskStatusMap.put(96, TaskEntity.Status.PENDING);
-			taskStatusMap.put(95, TaskEntity.Status.CLOSED);
-			taskStatusMap.put(103, TaskEntity.Status.CLOSED);
+			taskStatusMap.put(1, TaskEntity.Status.NEW);
+			taskStatusMap.put(2, TaskEntity.Status.INPROGRESS);
+			taskStatusMap.put(4, TaskEntity.Status.INPROGRESS);
+			taskStatusMap.put(7, TaskEntity.Status.PENDING);
+			taskStatusMap.put(5, TaskEntity.Status.CLOSED);
 			taskSetting.setStatusMappingSetting(taskStatusMap);
 			redmineSetting.setTaskSetting(taskSetting);
 			// BackLog Setting
 			BackLogSetting backLogSetting = new BackLogSetting();
 			tempSet = new HashSet<>();
-			tempSet.add(42);
+			tempSet.add(2);
 			backLogSetting.setTrackerId(tempSet);
 			Map<Integer, BackLogEntity.Priority> backLogPriorityMappingSetting = new HashMap<>();
+			backLogPriorityMappingSetting.put(5, BackLogEntity.Priority.CRITICAL);
 			backLogPriorityMappingSetting.put(4, BackLogEntity.Priority.CRITICAL);
 			backLogPriorityMappingSetting.put(3, BackLogEntity.Priority.HIGH);
 			backLogPriorityMappingSetting.put(2, BackLogEntity.Priority.MEDIUM);
@@ -177,11 +182,11 @@ public class ExtIfServiceImplTest {
 			backLogSetting.setPriorityMappingSetting(backLogPriorityMappingSetting);
 
 			Map<Integer, BackLogEntity.Status> backLogStatusMap = new HashMap<>();
-			backLogStatusMap.put(73, BackLogEntity.Status.NEW);
-			backLogStatusMap.put(75, BackLogEntity.Status.INPROGRESS);
-			backLogStatusMap.put(91, BackLogEntity.Status.INPROGRESS);
-			backLogStatusMap.put(96, BackLogEntity.Status.PENDING);
-			backLogStatusMap.put(95, BackLogEntity.Status.CLOSED);
+			taskStatusMap.put(1, TaskEntity.Status.NEW);
+			taskStatusMap.put(2, TaskEntity.Status.INPROGRESS);
+			taskStatusMap.put(4, TaskEntity.Status.INPROGRESS);
+			taskStatusMap.put(7, TaskEntity.Status.PENDING);
+			taskStatusMap.put(5, TaskEntity.Status.CLOSED);
 			backLogSetting.setStatusMappingSetting(backLogStatusMap);
 
 			redmineSetting.setBackLogSetting(backLogSetting);

@@ -313,6 +313,8 @@ public class DefaultRedmineDataMapper implements ExtIfDataMapper {
 		taskEntity.setClosedOn(converIOSDateTime(dbObject.getString("closed_on")));
 		taskEntity.setPlanedStartDate(converIOSDate(dbObject.getString("start_date")));
 		taskEntity.setPlanedEndDate(converIOSDate(dbObject.getString("due_date")));
+		dbObject.getString("due_date")estimated_hours
+		taskEntity.setEstimatedHours(estimatedHours);
 		taskEntity.setDoneRatio(dbObject.getInt("done_ratio"));
 		taskEntity.setOwner(getNestedDbObjectString((BasicDBObject) dbObject.get("assigned_to"), "name"));
 		taskEntity.setTitle(dbObject.getString("subject"));
@@ -345,16 +347,16 @@ public class DefaultRedmineDataMapper implements ExtIfDataMapper {
 			if (id == null) {
 				continue;
 			}
-			if (id.equals(redmineSetting.getBackLogSetting().getCustomIdEstimatedHours())) {
+			if (id.equals(redmineSetting.getTaskSetting().getCustomIdEstimatedHours())) {
 				taskEntity.setEstimatedHours(dbObject.getInt("value"));
 			}
-			if (id.equals(redmineSetting.getBackLogSetting().getCustomIdActualHours())) {
+			if (id.equals(redmineSetting.getTaskSetting().getCustomIdActualHours())) {
 				taskEntity.setActualHours(dbObject.getInt("value"));
 			}
-			if (id.equals(redmineSetting.getBackLogSetting().getCustomIdActualStartDate())) {
+			if (id.equals(redmineSetting.getTaskSetting().getCustomIdActualStartDate())) {
 				taskEntity.setActualStartDate(this.getNestedDbObjectLocalDate(customField, "value"));
 			}
-			if (id.equals(redmineSetting.getBackLogSetting().getCustomIdActualEndDate())) {
+			if (id.equals(redmineSetting.getTaskSetting().getCustomIdActualEndDate())) {
 				taskEntity.setActualEndDate(this.getNestedDbObjectLocalDate(customField, "value"));
 			}
 
