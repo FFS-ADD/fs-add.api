@@ -67,7 +67,7 @@ public class ProjectOverviewController {
 	}
 
 	private int getProjectStatus(HealthType healthType) {
-		return healthType.ordinal();
+		return healthType != null ? healthType.ordinal() : 0;
 	}
 
 	private String getDayAsString(LocalDate date, String pattern) {
