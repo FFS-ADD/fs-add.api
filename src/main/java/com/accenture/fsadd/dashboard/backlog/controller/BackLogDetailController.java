@@ -88,10 +88,9 @@ public class BackLogDetailController {
 		for (int i = 0; i <= BACK_DAY_COUNT; i++) {
 			BackLogSummaryEntity backLogDailySummaryEntity = dailySummaryModelMap.get(fromDay.plusDays(i));
 			if (backLogDailySummaryEntity != null) {
-				backLogDailyBurnDownModel.getPlanCompletedCount().add(backLogDailySummaryEntity.getTotalCount()
-						- (backLogDailySummaryEntity.getClosedCount() + backLogDailySummaryEntity.getDelayCount()));
+				backLogDailyBurnDownModel.getPlanCompletedCount().add((backLogDailySummaryEntity.getClosedCount() + backLogDailySummaryEntity.getDelayCount()));
 				backLogDailyBurnDownModel.getActualCompletedCount()
-						.add(backLogDailySummaryEntity.getTotalCount() - backLogDailySummaryEntity.getClosedCount());
+						.add(backLogDailySummaryEntity.getClosedCount());
 			} else {
 				backLogDailyBurnDownModel.getPlanCompletedCount().add(0);
 				backLogDailyBurnDownModel.getActualCompletedCount().add(0);
