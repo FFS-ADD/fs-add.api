@@ -20,6 +20,7 @@ import com.accenture.fsadd.dashboard.overview.business.HealthType;
 import com.accenture.fsadd.dashboard.overview.business.entity.OverviewEntity;
 import com.accenture.fsadd.dashboard.overview.business.entity.OverviewEventEntity;
 import com.accenture.fsadd.dashboard.overview.business.entity.ThresholdLimitEnity;
+import com.accenture.fsadd.dashboard.overview.business.entity.ThresholdLimitEnity.ThreshLimitType;
 import com.accenture.fsadd.dashboard.overview.business.repository.OverviewEventRepository;
 import com.accenture.fsadd.dashboard.overview.business.repository.OverviewRepository;
 import com.accenture.fsadd.dashboard.overview.business.service.OverviewService;
@@ -28,6 +29,7 @@ import com.accenture.fsadd.dashboard.qa.business.service.QueryAnswerService;
 import com.accenture.fsadd.dashboard.task.business.entity.TaskSummaryEntity;
 import com.accenture.fsadd.dashboard.task.business.service.TaskService;
 import com.accenture.fsadd.web.setting.controller.model.ProjectModel;
+import com.accenture.fsadd.web.setting.controller.model.ThresholdModel;
 import com.accenture.fsadd.web.setting.service.SettingService;
 
 @Service
@@ -154,51 +156,29 @@ public class OverviewServiceImpl implements OverviewService {
 		overviewEventEntityList.forEach((entity) -> this.insertEvent(entity));
 
 	}
+	
+	private ThresholdLimitEnity covertFromThreshodModelToThesholdLimit(ThresholdModel model) {
+		
+		ThresholdLimitEnity thresholdLimitEntity = new ThresholdLimitEnity();
+		thresholdLimitEntity.setType(ThreshLimitType.valueOf(model.getSystem().toUpperCase()));
+		thresholdLimitEntity.setLowerLimit(model.getOverCast());
+		thresholdLimitEntity.setUpperLimit(model.getRain());
+		thresholdLimitEntity.setWarningMessage("Warning: " +model.getNoticeMsg());
+		thresholdLimitEntity.setWarningMessage("Critical: " +model.getNoticeMsg());
+		return new ThresholdLimitEnity();
+		
+	}
 
 	protected List<ThresholdLimitEnity> getThresholdLimitListService() {
-		// TODO
+		
+		List<ThresholdModel> thresholds = settingService.findAllValidThresholdsInfo();
+		
 		List<ThresholdLimitEnity> result = new ArrayList<>();
-		ThresholdLimitEnity thresholdLimitEntity = new ThresholdLimitEnity();
-		thresholdLimitEntity.setType(ThresholdLimitEnity.ThreshLimitType.BACKLOG);
-		thresholdLimitEntity.setLowerLimit(0.08);
-		thresholdLimitEntity.setUpperLimit(0.1);
-		thresholdLimitEntity.setWarningMessage("Warning: The rate of the delayed backlog has been over lower limit!");
-		thresholdLimitEntity.setCriticalMessage("Critical:The rate of the delayed backlog has been over upper limit!");
-		result.add(thresholdLimitEntity);
-
-		thresholdLimitEntity = new ThresholdLimitEnity();
-		thresholdLimitEntity.setType(ThresholdLimitEnity.ThreshLimitType.BUG);
-		thresholdLimitEntity.setLowerLimit(0.08);
-		thresholdLimitEntity.setUpperLimit(0.1);
-		thresholdLimitEntity.setWarningMessage("Warning: The rate of the delayed bug has been over lower limit!");
-		thresholdLimitEntity.setCriticalMessage("Critical:The rate of the delayed bug has been over upper limit!");
-		result.add(thresholdLimitEntity);
-
-		thresholdLimitEntity = new ThresholdLimitEnity();
-		thresholdLimitEntity.setType(ThresholdLimitEnity.ThreshLimitType.QA);
-		thresholdLimitEntity.setLowerLimit(0.08);
-		thresholdLimitEntity.setUpperLimit(0.1);
-		thresholdLimitEntity.setWarningMessage("Warning: The rate of the delayed QA has been over lower limit!");
-		thresholdLimitEntity.setCriticalMessage("Critical:The rate of the delayed QA has been over upper limit!");
-		result.add(thresholdLimitEntity);
-
-		thresholdLimitEntity = new ThresholdLimitEnity();
-		thresholdLimitEntity.setType(ThresholdLimitEnity.ThreshLimitType.TASK);
-		thresholdLimitEntity.setLowerLimit(0.08);
-		thresholdLimitEntity.setUpperLimit(0.1);
-		thresholdLimitEntity.setWarningMessage("Warning: The rate of the delayed task has been over lower limit!");
-		thresholdLimitEntity.setCriticalMessage("Critical:The rate of the delayed task has been over upper limit!");
-		result.add(thresholdLimitEntity);
-
-		thresholdLimitEntity = new ThresholdLimitEnity();
-		thresholdLimitEntity.setType(ThresholdLimitEnity.ThreshLimitType.SOURCE_HEALTH);
-		thresholdLimitEntity.setLowerLimit(0);
-		thresholdLimitEntity.setUpperLimit(0);
-		thresholdLimitEntity.setLowerLimitString("warning");
-		thresholdLimitEntity.setUpperLimitString("warning");
-		thresholdLimitEntity.setWarningMessage("Warning: Health check of source code was failed!");
-		thresholdLimitEntity.setCriticalMessage("Critical:Health check of source code was failed!");
-		result.add(thresholdLimitEntity);
+		
+		for(ThresholdModel threshold: thresholds) {
+			ThresholdLimitEnity	thresholdLimitEntity = covertFromThreshodModelToThesholdLimit(threshold);
+            result.add(thresholdLimitEntity);
+		}
 
 		return result;
 

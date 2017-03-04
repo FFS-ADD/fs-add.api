@@ -6,8 +6,8 @@ public class ThresholdProfileForm {
 	private String system;
 	private String catalog;
 	private String kpi;
-	private String overCast;
-	private String rain;
+	private double overCast;
+	private double rain;
 	private String noticeMsg;
 
     public String getId() {
@@ -50,19 +50,19 @@ public class ThresholdProfileForm {
 		this.kpi = kpi;
 	}
 
-	public String getOverCast() {
+	public double getOverCast() {
 		return overCast;
 	}
 
-	public void setOverCast(String overCast) {
+	public void setOverCast(double overCast) {
 		this.overCast = overCast;
 	}
 
-	public String getRain() {
+	public double getRain() {
 		return rain;
 	}
 
-	public void setRain(String rain) {
+	public void setRain(double rain) {
 		this.rain = rain;
 	}
 
