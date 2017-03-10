@@ -98,7 +98,7 @@ public class ExtIfServiceImplTest {
 			// QA Setting
 			QASetting qaSetting = new QASetting();
 			Set<Integer> tempSet = new HashSet<>();
-			tempSet.add(3);
+			tempSet.add(8);
 			qaSetting.setTrackerId(tempSet);
 			Map<Integer, QueryAnswerEntity.Status> tempMap = new HashMap<>();
 			tempMap.put(1, QueryAnswerEntity.Status.NEW);
@@ -117,8 +117,8 @@ public class ExtIfServiceImplTest {
 			issueStatusMap.put(1, IssueEntity.Status.NEW);
 			issueStatusMap.put(2, IssueEntity.Status.INPROGRESS);
 			issueStatusMap.put(4, IssueEntity.Status.INPROGRESS);
-			issueStatusMap.put(3, IssueEntity.Status.FIXED);
-			issueStatusMap.put(8, IssueEntity.Status.RETESTING);
+			issueStatusMap.put(9, IssueEntity.Status.FIXED);
+			issueStatusMap.put(10, IssueEntity.Status.RETESTING);
 			issueStatusMap.put(5, IssueEntity.Status.CLOSED);
 			issueStatusMap.put(6, IssueEntity.Status.CLOSED);
 			issueSetting.setStatusMappingSetting(issueStatusMap);
@@ -139,17 +139,17 @@ public class ExtIfServiceImplTest {
 			issuePhaseMappingSetting.put("03 ITb2 - 多機種検証", IssueEntity.Phase.ITB);
 			issuePhaseMappingSetting.put("06 行員試行", IssueEntity.Phase.UAT);
 			issueSetting.setPhaseMappingSetting(issuePhaseMappingSetting);
-			issueSetting.setCustomIdDetector(1);
-			issueSetting.setCustomIdOccuredDate(3);
+			issueSetting.setCustomIdDetector(7);
+			issueSetting.setCustomIdOccuredDate(8);
 			redmineSetting.setIssueSetting(issueSetting);
 
 			// Task Setting
 			TaskSetting taskSetting = new TaskSetting();
 			Map<Integer, TaskEntity.Type> trackerIdMap = new HashMap<>();
-			trackerIdMap.put(4, TaskEntity.Type.ANALYSIS);
+			trackerIdMap.put(6, TaskEntity.Type.ANALYSIS);
 			trackerIdMap.put(5, TaskEntity.Type.DESGIN);
 			trackerIdMap.put(8, TaskEntity.Type.BUILD);
-			trackerIdMap.put(6, TaskEntity.Type.TEST);
+			trackerIdMap.put(99, TaskEntity.Type.TEST);
 			trackerIdMap.put(7, TaskEntity.Type.DEPLOYMENT);
 			taskSetting.setTrackerId(trackerIdMap);
 			Map<Integer, TaskEntity.Priority> taskPriorityMappingSetting = new HashMap<>();
@@ -159,22 +159,22 @@ public class ExtIfServiceImplTest {
 			taskPriorityMappingSetting.put(2, TaskEntity.Priority.MEDIUM);
 			taskPriorityMappingSetting.put(1, TaskEntity.Priority.LOW);
 			taskSetting.setPriorityMappingSetting(taskPriorityMappingSetting);
-
+//
 			Map<Integer, TaskEntity.Status> taskStatusMap = new HashMap<>();
 			taskStatusMap.put(1, TaskEntity.Status.NEW);
 			taskStatusMap.put(2, TaskEntity.Status.INPROGRESS);
 			taskStatusMap.put(4, TaskEntity.Status.INPROGRESS);
-			taskStatusMap.put(7, TaskEntity.Status.PENDING);
+			taskStatusMap.put(8, TaskEntity.Status.PENDING);
 			taskStatusMap.put(5, TaskEntity.Status.CLOSED);
 			taskSetting.setStatusMappingSetting(taskStatusMap);
-			taskSetting.setCustomIdActualEndDate(6);
-			taskSetting.setCustomIdActualHours(4);
-			taskSetting.setCustomIdActualStartDate(5);
+			taskSetting.setCustomIdActualEndDate(5);
+			taskSetting.setCustomIdActualHours(6);
+			taskSetting.setCustomIdActualStartDate(4);
 			redmineSetting.setTaskSetting(taskSetting);
 			// BackLog Setting
 			BackLogSetting backLogSetting = new BackLogSetting();
 			tempSet = new HashSet<>();
-			tempSet.add(2);
+			tempSet.add(7);
 			backLogSetting.setTrackerId(tempSet);
 			Map<Integer, BackLogEntity.Priority> backLogPriorityMappingSetting = new HashMap<>();
 			backLogPriorityMappingSetting.put(5, BackLogEntity.Priority.CRITICAL);
@@ -188,13 +188,13 @@ public class ExtIfServiceImplTest {
 			taskStatusMap.put(1, TaskEntity.Status.NEW);
 			taskStatusMap.put(2, TaskEntity.Status.INPROGRESS);
 			taskStatusMap.put(4, TaskEntity.Status.INPROGRESS);
-			taskStatusMap.put(7, TaskEntity.Status.PENDING);
+			taskStatusMap.put(8, TaskEntity.Status.PENDING);
 			taskStatusMap.put(5, TaskEntity.Status.CLOSED);
 			backLogSetting.setStatusMappingSetting(backLogStatusMap);
 			
-			backLogSetting.setCustomIdActualEndDate(6);
-			backLogSetting.setCustomIdActualHours(4);
-			backLogSetting.setCustomIdActualStartDate(5);
+			backLogSetting.setCustomIdActualEndDate(5);
+			backLogSetting.setCustomIdActualHours(6);
+			backLogSetting.setCustomIdActualStartDate(4);
 
 			redmineSetting.setBackLogSetting(backLogSetting);
 
@@ -203,7 +203,7 @@ public class ExtIfServiceImplTest {
 			// tracker.setBugId(28);
 			// tracker.setTaskId(new int[]{42, 43, 46, 47, 48});
 			redmineSetting.setQaSetting(qaSetting);
-			redmineSetting.setRootUrl("http://localhost:8888/redmine/");
+			redmineSetting.setRootUrl("http://localhost:81/redmine/");
 			redmineSetting.setHttpHeaders("Authorization:Basic ZXh0aWY6ZnNhZGQjMTExMQ==");
 			redmineSetting.setIssueUrl("issues.json");
 			redmineSetting.setFixVersionId("");
@@ -216,7 +216,7 @@ public class ExtIfServiceImplTest {
 
 			// SonarQub
 			SonarQubeSetting sonarQubeSetting = new SonarQubeSetting();
-			sonarQubeSetting.setProjectKey("fs-add.api");
+			sonarQubeSetting.setProjectKey("fs-add");
 			sonarQubeSetting.setDashboardCollectionName("sonardashboard");
 			sonarQubeSetting.setIssuesCollectionName("sonarqube_issues");
 			sonarQubeSetting.setRootUrl("http://localhost:9000/sonar");

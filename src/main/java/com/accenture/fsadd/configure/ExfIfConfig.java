@@ -33,7 +33,7 @@ public class ExfIfConfig {
 		return new DefaultRedmineDataMapper();
 	}
 
-	//@Bean
+	@Bean
 	public ExtIfRunner getExtIfRunner() {
 
 		ExtIfRunner extIfRunner = new ExtIfRunner();
