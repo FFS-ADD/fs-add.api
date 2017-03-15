@@ -342,6 +342,7 @@ public class DefaultRedmineDataMapper implements ExtIfDataMapper {
     taskEntity.setPriority(priority);
 
     List<BasicDBObject> customFields = (List<BasicDBObject>) dbObject.get("custom_fields");
+    if (customFields != null) {
     for (BasicDBObject customField : customFields) {
       Integer id = getNestedDbObjectInteger(customField, "id");
       if (id == null) {
@@ -368,6 +369,7 @@ public class DefaultRedmineDataMapper implements ExtIfDataMapper {
         taskEntity.setActualEndDate(this.getNestedDbObjectLocalDate(customField, "value"));
       }
 
+    }
     }
     Integer parentId = this.getNestedDbObjectInteger((BasicDBObject) dbObject.get("parent"), "id");
     if (parentId == null) {
