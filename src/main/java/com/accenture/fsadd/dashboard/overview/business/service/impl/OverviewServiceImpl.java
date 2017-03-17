@@ -134,7 +134,7 @@ public class OverviewServiceImpl implements OverviewService {
 
 		List<ProjectModel> projectModelList = settingService.findAllValidProjectsInfo();
 		String projectName = "fsadd";
-		if (projectModelList.size() > 0) {
+		if (!projectModelList.isEmpty()) {
 			projectName = projectModelList.get(0).getProjectName();
 		}
 		OverviewEntity overviewEntity = new OverviewEntity();
@@ -156,28 +156,28 @@ public class OverviewServiceImpl implements OverviewService {
 		overviewEventEntityList.forEach((entity) -> this.insertEvent(entity));
 
 	}
-	
+
 	private ThresholdLimitEnity covertFromThreshodModelToThesholdLimit(ThresholdModel model) {
-		
+
 		ThresholdLimitEnity thresholdLimitEntity = new ThresholdLimitEnity();
 		thresholdLimitEntity.setType(ThreshLimitType.valueOf(model.getSystem().toUpperCase()));
 		thresholdLimitEntity.setLowerLimit(model.getOverCast());
 		thresholdLimitEntity.setUpperLimit(model.getRain());
-		thresholdLimitEntity.setWarningMessage("Warning: " +model.getNoticeMsg());
-		thresholdLimitEntity.setWarningMessage("Critical: " +model.getNoticeMsg());
+		thresholdLimitEntity.setWarningMessage("Warning: " + model.getNoticeMsg());
+		thresholdLimitEntity.setWarningMessage("Critical: " + model.getNoticeMsg());
 		return new ThresholdLimitEnity();
-		
+
 	}
 
 	protected List<ThresholdLimitEnity> getThresholdLimitListService() {
-		
+
 		List<ThresholdModel> thresholds = settingService.findAllValidThresholdsInfo();
-		
+
 		List<ThresholdLimitEnity> result = new ArrayList<>();
-		
-		for(ThresholdModel threshold: thresholds) {
-			ThresholdLimitEnity	thresholdLimitEntity = covertFromThreshodModelToThesholdLimit(threshold);
-            result.add(thresholdLimitEntity);
+
+		for (ThresholdModel threshold : thresholds) {
+			ThresholdLimitEnity thresholdLimitEntity = covertFromThreshodModelToThesholdLimit(threshold);
+			result.add(thresholdLimitEntity);
 		}
 
 		return result;
@@ -251,14 +251,4 @@ public class OverviewServiceImpl implements OverviewService {
 		return HealthType.GOOD;
 
 	}
-
-	// private void insertEvent(OverviewEventEntity.EventType type, String
-	// noticeMessage, LocalDate eventOccuredDate) {
-	// BigInteger = int overviewEventRepository.count();
-	// OverviewEventEntity overviewEventEntity = new OverviewEventEntity();
-	// overviewEventEntity.setEventTye(type);
-	// overviewEventEntity.setEventDate(eventOccuredDate);
-	//
-	// }
-
 }

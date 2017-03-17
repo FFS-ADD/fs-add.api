@@ -50,7 +50,7 @@ public class SettingServiceImpl implements SettingService {
 	@Override
 	public ThresholdModel createThreshold(ThresholdProfileForm form) {
 		int size = thresholdsRepository.findAll().size();
-		form.setId("" + (size+1));
+		form.setId(String.valueOf(size+1));
 	    ThresholdModel threshold = new ThresholdModel();
         BeanUtils.copyProperties(form, threshold);
         return thresholdsRepository.insert(threshold);
