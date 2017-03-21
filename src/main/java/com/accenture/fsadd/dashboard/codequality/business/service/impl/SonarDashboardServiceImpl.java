@@ -63,6 +63,6 @@ public class SonarDashboardServiceImpl implements SonarDashboardService {
 				resultList.add(empty);
 			}
 		}
-		return hist;
+		return resultList;
 	}
 }
